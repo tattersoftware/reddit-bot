@@ -26,16 +26,14 @@
 	"require": {
 		"php": ">=7.3",
 		"codeigniter4/codeigniter4": "dev-develop",
-		"sentry/sdk": "^3.0"
+		"sentry/sdk": "^3.0",
+		"tatter/reddit" : "^1.0"
 	},
 	"require-dev": {
 		"tatter/patches": "^1.1",
 		"tatter/tools": "^1.2"
 	},
 	"autoload": {
-		"psr-4": {
-			"Tatter\\Reddit\\": "/opt/codeigniter4/reddit/src"
-		},
 		"exclude-from-classmap": [
 			"**/Database/Migrations/**"
 		]

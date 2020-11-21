@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        php-versions: ['7.2', '7.3', '7.4']
+        php-versions: ['7.3', '7.4']
 
     runs-on: ubuntu-latest
 
@@ -50,3 +50,8 @@ jobs:
 
       - name: Test with PHPUnit
         run: vendor/bin/phpunit --verbose --coverage-text
+        env:
+          reddit.clientId: ${{ secrets.REDDIT_CLIENT_ID }}
+          reddit.clientSecret: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          reddit.username: ${{ secrets.REDDIT_USERNAME }}
+          reddit.password: ${{ secrets.REDDIT_PASSWORD }}
