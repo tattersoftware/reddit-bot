@@ -13,6 +13,7 @@ parameters:
 	universalObjectCratesClasses:
 		- CodeIgniter\Entity
 		- Faker\Generator
+		- Tatter\Reddit\Structures\Thing
 	scanDirectories:
 		- vendor/codeigniter4/codeigniter4/system/Helpers
 	dynamicConstantNames:

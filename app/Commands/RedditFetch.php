@@ -1,6 +1,6 @@
 <?php namespace App\Commands;
 
-use App\Models\DungeonModel;
+use App\Models\SubmissionModel;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 use Tatter\Reddit\Exceptions\RedditException;
@@ -21,18 +21,31 @@ class RedditFetch extends BaseCommand
 
 	public function run(array $params = [])
 	{
-		$reddit = service('reddit');
-		$things = $reddit->subreddit('heroesofthestorm')->fetch('new');
+		// Preload the most recent submissions that have already been processed
+		// to make sure we do not load them again
+		$submissions = model(SubmissionModel::class)
+			->orderBy('created_at', 'desc')
+			->limit(100)
+			->findColumn('name') ?? [];
+
+		$directory = rtrim(config('Reddit')->directory, '/ ') . DIRECTORY_SEPARATOR;
+		$reddit    = service('reddit');
+		$things    = $reddit->subreddit('heroesofthestorm')->fetch('new');
 
 		foreach ($things as $thing)
 		{
-			$file = WRITEPATH . 'submissions' . DIRECTORY_SEPARATOR . $thing->name();
-			if (is_file($file))
+			$name = $thing->name();
+			if (in_array($name, $submissions))
 			{
 				continue;
 			}
 
-			file_put_contents($file, serialize($thing));
+			if (is_file($directory . $name))
+			{
+				continue;
+			}
+
+			file_put_contents($directory . $name, serialize($thing));
 		}
 	}
 }
