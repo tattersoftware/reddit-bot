@@ -59,5 +59,12 @@
 		<env name="database.tests.DBDriver" value="MySQLi"/>
 		<env name="database.tests.DBPrefix" value="tests_"/>
 		-->
+
+		<!-- Reddit Authentication -->
+		<env name="reddit.clientId" value=""/>
+		<env name="reddit.clientSecret" value=""/>
+		<env name="reddit.username" value=""/>
+		<env name="reddit.password" value=""/>
+		<env name="reddit.accessToken" value=""/>
 	</php>
 </phpunit>
