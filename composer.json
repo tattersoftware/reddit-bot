@@ -1,0 +1,61 @@
+{
+	"name": "heroesshare/bot",
+	"type": "project",
+	"description": "Bot for Heroes Share",
+	"keywords": [
+		"codeigniter",
+		"codeigniter4",
+		"heroes",
+		"share",
+		"bot",
+		"hots",
+		"nexus",
+		"reddit",
+		"twitch"
+	],
+	"homepage": "https://heroesshare.net",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Matthew Gatner",
+			"email": "mgatner@tattersoftware.com",
+			"homepage": "https://tattersoftware.com",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=7.3",
+		"codeigniter4/codeigniter4": "dev-develop",
+		"sentry/sdk": "^3.0"
+	},
+	"require-dev": {
+		"tatter/patches": "^1.1",
+		"tatter/tools": "^1.2"
+	},
+	"autoload": {
+		"psr-4": {
+			"Tatter\\Reddit\\": "/opt/codeigniter4/reddit/src"
+		},
+		"exclude-from-classmap": [
+			"**/Database/Migrations/**"
+		]
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\Support\\": "tests/_support"
+		}
+	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/codeigniter4/codeigniter4"
+		}
+	],
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"scripts": {
+		"analyze": "phpstan analyze",
+		"style": "phpcbf --standard=./vendor/codeigniter4/codeigniter4-standard/CodeIgniter4 tests/ app/",
+		"test": "phpunit"
+	}
+}
