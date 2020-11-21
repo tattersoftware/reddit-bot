@@ -4,7 +4,7 @@ use CodeIgniter\Test\CIUnitTestCase;
 use Tatter\Reddit\Structures\Thing;
 use Tatter\Reddit\Tokens\PasswordHandler;
 
-class RedditTest extends CIUnitTestCase
+class FetchTest extends CIUnitTestCase
 {
 	public function testCanGetAccessToken()
 	{
