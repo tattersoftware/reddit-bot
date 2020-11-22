@@ -10,7 +10,6 @@ class InitialSeeder extends Seeder
 
 		// Seeds to run
 		$seeds = [
-			'Tatter\Settings\Database\Seeds\SettingsSeeder',
 			'App\Database\Seeds\TemplateSeeder',
 		];
 
