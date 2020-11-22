@@ -1,10 +1,11 @@
 <?php
 
-use CodeIgniter\Test\CIUnitTestCase;
+use Tatter\Reddit\Structures\Kind;
 use Tatter\Reddit\Structures\Thing;
 use Tatter\Reddit\Tokens\PasswordHandler;
+use Tests\Support\ProjectTestCase;
 
-class FetchTest extends CIUnitTestCase
+class FetchTest extends ProjectTestCase
 {
 	public function testCanGetAccessToken()
 	{
@@ -22,5 +23,16 @@ class FetchTest extends CIUnitTestCase
 		$result = unserialize($contents);
 
 		$this->assertInstanceOf(Thing::class, $result);
+	}
+
+	public function testFetchStoresAfterSetting()
+	{
+		$this->assertEmpty(cache('reddit_links_after'));
+
+		command('reddit:fetch');
+		$result = cache('reddit_links_after');
+
+		$this->assertNotEmpty($result);
+		$this->assertEquals(1, preg_match(Kind::NAME_REGEX, $result));
 	}
 }

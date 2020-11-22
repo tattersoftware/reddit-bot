@@ -108,3 +108,10 @@
 # reddit.clientSecret = 
 # reddit.username = 
 # reddit.password = 
+
+#--------------------------------------------------------------------
+# PUSHOVER
+#--------------------------------------------------------------------
+
+# pushover.user = 
+# pushover.token = 

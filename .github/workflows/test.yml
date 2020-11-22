@@ -55,3 +55,5 @@ jobs:
           reddit.clientSecret: ${{ secrets.REDDIT_CLIENT_SECRET }}
           reddit.username: ${{ secrets.REDDIT_USERNAME }}
           reddit.password: ${{ secrets.REDDIT_PASSWORD }}
+          pushover.user: ${{ secrets.PUSHOVER_USER }}
+          pushover.token: ${{ secrets.PUSHOVER_TOKEN }}

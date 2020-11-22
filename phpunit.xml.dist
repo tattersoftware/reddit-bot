@@ -66,5 +66,9 @@
 		<env name="reddit.username" value=""/>
 		<env name="reddit.password" value=""/>
 		<env name="reddit.accessToken" value=""/>
+
+		<!-- Pushover configuration -->
+		<env name="pushover.user" value=""/>
+		<env name="pushover.token" value=""/>
 	</php>
 </phpunit>

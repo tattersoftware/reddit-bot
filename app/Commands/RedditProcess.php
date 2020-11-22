@@ -3,7 +3,6 @@
 use App\Models\SubmissionModel;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
-use Tatter\Reddit\Exceptions\RedditException;
 use Tatter\Reddit\Structures\Link;
 
 /**
@@ -19,7 +18,6 @@ class RedditProcess extends BaseCommand
 	protected $name        = 'reddit:process';
 	protected $description = 'Process cached Reddit comments and posts.';
 	protected $usage       = 'reddit:process';
-	protected $arguments   = [];
 
 	public function run(array $params = [])
 	{
@@ -83,10 +81,7 @@ class RedditProcess extends BaseCommand
 			}
 
 			// Remove the file so it is not processed again
-			if (ENVIRONMENT !== 'testing')
-			{
-				unlink($file);
-			}
+			unlink($file);
 		}
 	}
 }
