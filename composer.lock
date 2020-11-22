@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9b5d265d88cbc829fc43c94eb22e801",
+    "content-hash": "6dcaa1dfe6dbbca274520f5c0be0f550",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -78,12 +78,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/CodeIgniter4.git",
-                "reference": "fc9e219ff74b4ad4835be69cb4af3d839a86eca3"
+                "reference": "ce5d30cba9a8d6394191a79d360d2e2db996c768"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/fc9e219ff74b4ad4835be69cb4af3d839a86eca3",
-                "reference": "fc9e219ff74b4ad4835be69cb4af3d839a86eca3",
+                "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/ce5d30cba9a8d6394191a79d360d2e2db996c768",
+                "reference": "ce5d30cba9a8d6394191a79d360d2e2db996c768",
                 "shasum": ""
             },
             "require": {
@@ -141,7 +141,7 @@
                 "slack": "https://codeigniterchat.slack.com",
                 "issues": "https://github.com/codeigniter4/CodeIgniter4/issues"
             },
-            "time": "2020-11-20T17:33:10+00:00"
+            "time": "2020-11-22T07:29:15+00:00"
         },
         {
             "name": "components/jquery",
@@ -2420,16 +2420,16 @@
         },
         {
             "name": "tatter/reddit",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tattersoftware/codeigniter4-reddit.git",
-                "reference": "b7622dc4b333fbf524de46d9db253993303a35ef"
+                "reference": "ec4f05903802784ac1be85a3602ce2bf1eb42105"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-reddit/zipball/b7622dc4b333fbf524de46d9db253993303a35ef",
-                "reference": "b7622dc4b333fbf524de46d9db253993303a35ef",
+                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-reddit/zipball/ec4f05903802784ac1be85a3602ce2bf1eb42105",
+                "reference": "ec4f05903802784ac1be85a3602ce2bf1eb42105",
                 "shasum": ""
             },
             "require": {
@@ -2470,62 +2470,9 @@
             ],
             "support": {
                 "issues": "https://github.com/tattersoftware/codeigniter4-reddit/issues",
-                "source": "https://github.com/tattersoftware/codeigniter4-reddit/tree/v1.0.0"
+                "source": "https://github.com/tattersoftware/codeigniter4-reddit/tree/v1.0.1"
             },
-            "time": "2020-11-21T15:01:18+00:00"
-        },
-        {
-            "name": "tatter/settings",
-            "version": "v1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tattersoftware/codeigniter4-settings.git",
-                "reference": "ac6a113303794f010db79c69e076c6cd8858fbcf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-settings/zipball/ac6a113303794f010db79c69e076c6cd8858fbcf",
-                "reference": "ac6a113303794f010db79c69e076c6cd8858fbcf",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2"
-            },
-            "require-dev": {
-                "codeigniter4/codeigniter4": "dev-develop",
-                "tatter/tools": "^1.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Tatter\\Settings\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Matthew Gatner",
-                    "email": "mgatner@tattersoftware.com",
-                    "homepage": "https://tattersoftware.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Lightweight settings management for CodeIgniter 4",
-            "homepage": "https://github.com/tattersoftware/codeigniter4-settings",
-            "keywords": [
-                "Settings",
-                "codeigniter",
-                "codeigniter4",
-                "preferences"
-            ],
-            "support": {
-                "issues": "https://github.com/tattersoftware/codeigniter4-settings/issues",
-                "source": "https://github.com/tattersoftware/codeigniter4-settings/tree/v1.1.0"
-            },
-            "time": "2020-11-12T18:01:10+00:00"
+            "time": "2020-11-22T18:58:08+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
