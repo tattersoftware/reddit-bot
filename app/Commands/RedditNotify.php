@@ -38,13 +38,8 @@ class RedditNotify extends BaseCommand
 				$this->push($submission);
 			}
 
-			// Mark them as notified
-			$notified[] = $submission->id;
-		}
-
-		if (count($notified))
-		{
-			model(SubmissionModel::class)->update($notified)->update($notified, ['notified' => 1]);
+			// Mark is as notified as we go in case tasks are run in parallel
+			model(SubmissionModel::class)->update($submission->id, ['notified' => 1]);
 		}
 	}
 
@@ -65,6 +60,7 @@ class RedditNotify extends BaseCommand
 			'contact'     => 'Heroes Share',
 			'unsubscribe' => 'Reply with "Unsubscribe"',
 			'author'      => $submission->author,
+			'url'         => $submission->url,
 			'match'       => $submission->match,
 			'kind'        => $submission->kind,
 			'html'        => $submission->html,
