@@ -81,10 +81,7 @@ class RedditProcess extends BaseCommand
 			}
 
 			// Remove the file so it is not processed again
-			if (ENVIRONMENT !== 'testing')
-			{
-				unlink($file);
-			}
+			unlink($file);
 		}
 	}
 }

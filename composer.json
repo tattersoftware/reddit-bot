@@ -29,8 +29,7 @@
 		"sentry/sdk": "^3.0",
 		"tatter/reddit" : "^1.0",
 		"tatter/pushover": "^1.0",
-		"tatter/outbox": "^2.0",
-		"tatter/settings": "^1.1"
+		"tatter/outbox": "^2.0"
 	},
 	"require-dev": {
 		"tatter/patches": "^1.1",

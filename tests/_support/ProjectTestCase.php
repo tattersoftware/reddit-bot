@@ -2,7 +2,10 @@
 
 use CodeIgniter\Config\Config;
 use CodeIgniter\Test\CIDatabaseTestCase;
+use CodeIgniter\Test\Filters\CITestStreamFilter;
 use Config\Reddit as RedditConfig;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
 
 class ProjectTestCase extends CIDatabaseTestCase
 {
@@ -11,7 +14,33 @@ class ProjectTestCase extends CIDatabaseTestCase
 	 *
 	 * @var boolean
 	 */
-	protected $refresh = false;
+	protected $refresh = true;
+
+	/**
+	 * @var vfsStreamDirectory|null
+	 */
+	protected $root;
+
+	/**
+	 * @var resource
+	 */
+	private $streamFilter;
+
+	/**
+	 * The seed file(s) used for all tests within this test case.
+	 * Should be fully-namespaced or relative to $basePath
+	 *
+	 * @var string|array
+	 */
+	protected $seed = 'App\Database\Seeds\InitialSeeder';
+
+	/**
+	 * The path to the seeds directory.
+	 * Allows overriding the default application directories.
+	 *
+	 * @var string
+	 */
+	protected $basePath = APPPATH . 'Database';
 
 	/**
 	 * The namespace(s) to help us find the migration classes.
@@ -28,13 +57,32 @@ class ProjectTestCase extends CIDatabaseTestCase
 	 */
 	protected $config;
 
+	/**
+	 * Mocks the configuration file and buffers output to the stream filter
+	 */
 	protected function setUp(): void
 	{
 		parent::setUp();
 
+		// Start the virtual filesystem
+		$this->root = vfsStream::setup();
+        vfsStream::copyFromFileSystem(SUPPORTPATH . 'submissions', $this->root);
+
 		// Configure for testing
-		$config = new RedditConfig();
-		$config->directory = SUPPORTPATH . 'submissions';
+		$config            = new RedditConfig();
+		$config->directory = $this->root->url();
 		Config::injectMock('Reddit', $config);
+
+		// Set up the stream filter so commands don't output
+		CITestStreamFilter::$buffer = '';
+		$this->streamFilter         = stream_filter_append(STDOUT, 'CITestStreamFilter');
+		$this->streamFilter         = stream_filter_append(STDERR, 'CITestStreamFilter');
+	}
+
+	protected function tearDown(): void
+	{
+		stream_filter_remove($this->streamFilter);
+
+		$this->root = null;
 	}
 }
