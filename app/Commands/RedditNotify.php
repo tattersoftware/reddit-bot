@@ -25,6 +25,7 @@ class RedditNotify extends BaseCommand
 
 	public function run(array $params = [])
 	{
+		$notified = [];
 		foreach (model(SubmissionModel::class)->where('notified', 0)->findAll() as $submission)
 		{
 			CLI::write('Sending notifications for ' . $submission->name);
@@ -36,6 +37,14 @@ class RedditNotify extends BaseCommand
 			{
 				$this->push($submission);
 			}
+
+			// Mark them as notified
+			$notified[] = $submission->id;
+		}
+
+		if (count($notified))
+		{
+			model(SubmissionModel::class)->update($notified)->update($notified, ['notified' => 1]);
 		}
 	}
 
