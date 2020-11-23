@@ -3,7 +3,7 @@
 use App\Models\SubmissionModel;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
-use Tatter\Reddit\Structures\Link;
+use Tatter\Reddit\Structures\Kind;
 
 /**
  * Reddit Process Task
@@ -34,7 +34,8 @@ class RedditProcess extends BaseCommand
 			$contents = file_get_contents($file);
 			try
 			{
-				$thing = unserialize($contents);
+				/** @var Kind $kind */
+				$kind = unserialize($contents);
 			}
 			catch (\Throwable $e)
 			{
@@ -42,25 +43,38 @@ class RedditProcess extends BaseCommand
 				continue;
 			}
 
-			// Determine the fields by Kind
+			// Convert the Kind to Submission
 			$submission = [];
-			switch (get_class($thing))
+			switch ((string) $kind)
 			{
-				case Link::class:
+				case 'Comment':
 					$submission = [
-						'kind'      => (string) $thing,
-						'name'      => $thing->name(),
-						'author'    => $thing->author,
-						'url'       => $thing->url,
-						'thumbnail' => $thing->thumbnail,
-						'title'     => $thing->title,
-						'body'      => $thing->selftext,
-						'html'      => $thing->selftext_html,
+						'kind'      => (string) $kind,
+						'name'      => $kind->name(),
+						'author'    => $kind->author,
+						'url'       => $kind->link_url . $kind->id,
+						'title'     => $kind->link_title,
+						'body'      => $kind->body,
+						'html'      => $kind->body_html,
+					];
+				break;
+
+				case 'Link':
+					$submission = [
+						'kind'      => (string) $kind,
+						'name'      => $kind->name(),
+						'author'    => $kind->author,
+						'url'       => $kind->url,
+						'thumbnail' => $kind->thumbnail,
+						'title'     => $kind->title,
+						'body'      => $kind->selftext,
+						'html'      => $kind->selftext_html,
 					];
 				break;
 
 				default:
-					CLI::write('Skipping unsupported Kind: ' . get_class($thing), 'red');
+					log_message('error', 'Unsupport Kind in Reddit Process:' . get_class($kind));
+					CLI::write('Skipping unsupported Kind: ' . get_class($kind), 'red');
 					continue 2;
 			}
 

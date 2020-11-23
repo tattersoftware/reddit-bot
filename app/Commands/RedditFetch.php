@@ -4,6 +4,7 @@ use App\Models\SubmissionModel;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 use Tatter\Reddit\Exceptions\RedditException;
+use Tatter\Reddit\Reddit;
 use Tatter\Reddit\Structures\Kind;
 use Tatter\Reddit\Structures\Listing;
 
@@ -22,6 +23,13 @@ class RedditFetch extends BaseCommand
 	protected $arguments   = [];
 
 	/**
+	 * Reddit API client
+	 *
+	 * @var Reddit
+	 */
+	protected $reddit;
+
+	/**
 	 * Directory for storing submissions
 	 *
 	 * @var string
@@ -37,6 +45,7 @@ class RedditFetch extends BaseCommand
 
 	public function run(array $params = [])
 	{
+		$this->reddit    = service('Reddit');
 		$this->directory = rtrim(config('Reddit')->directory, '/ ') . DIRECTORY_SEPARATOR;
 
 		// Preload the most recent submissions that have already been processed
@@ -46,38 +55,57 @@ class RedditFetch extends BaseCommand
 			->limit(100)
 			->findColumn('name') ?? [];
 
-		$reddit = service('reddit')->subreddit('heroesofthestorm');
-		if ($after = cache('reddit_links_after'))
-		{
-			$reddit->after($after);
-		}
+		// Check for new Links
+		$this->cacheSubmissions($this->fetchSubmissions('new', 'reddit_last_link'));
 
-		$listing = $reddit->fetch('new');
-		if ($listing instanceof Listing)
-		{
-			$this->cacheLinks($listing);
-		}
-		else
-		{
-			CLI::write('Unexpected result from Reddit API: ' . get_class($listing));
-		}
-
-		// Store the after field for next run
-		cache()->save('reddit_links_after', $listing->after);
-
+		// Check for new Comments
+		$this->cacheSubmissions($this->fetchSubmissions('comments', 'reddit_last_comment'));
 	}
 
 	/**
-	 * Caches Links from an API Listing
+	 * Fetches a Listing of new submissions
+	 *
+	 * @param string $uri           URI to use for the submissions
+	 * @param string|null $cacheKey Cache key to use for the "before" query
+	 *
+	 * @return Listing $listing
+	 *
+	 * @throws \RuntimeException
+	 */
+	protected function fetchSubmissions(string $uri, string $cacheKey = null): Listing
+	{
+		if ($cacheKey && $before = cache($cacheKey))
+		{
+			$this->reddit->before($before);
+		}
+
+		$listing = $this->reddit->fetch($uri);
+		if (! $listing instanceof Listing)
+		{
+			throw new \RuntimeException('Unexpected result from Reddit API: ' . get_class($listing));
+		}
+
+		// Store the first result as the most recent
+		if ($cacheKey && $kind = $listing->current())
+		{
+			/** @var Kind $kind */
+			cache()->save($cacheKey, $kind->name());
+		}
+
+		return $listing;
+	}
+
+	/**
+	 * Caches Things from an API Listing
 	 *
 	 * @param Listing $listing
 	 */
-	protected function cacheLinks(Listing $listing): void
+	protected function cacheSubmissions(Listing $listing): void
 	{
-		/** @var Kind $thing */
-		foreach ($listing as $thing)
+		/** @var Kind $kind */
+		foreach ($listing as $kind)
 		{
-			$name = $thing->name();
+			$name = $kind->name();
 			if (in_array($name, $this->submissions))
 			{
 				continue;
@@ -88,7 +116,7 @@ class RedditFetch extends BaseCommand
 				continue;
 			}
 
-			file_put_contents($this->directory . $name, serialize($thing));
+			file_put_contents($this->directory . $name, serialize($kind));
 		}
 	}
 }

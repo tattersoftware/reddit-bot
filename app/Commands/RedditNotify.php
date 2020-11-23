@@ -25,6 +25,7 @@ class RedditNotify extends BaseCommand
 
 	public function run(array $params = [])
 	{
+		$notified = [];
 		foreach (model(SubmissionModel::class)->where('notified', 0)->findAll() as $submission)
 		{
 			CLI::write('Sending notifications for ' . $submission->name);
@@ -36,6 +37,9 @@ class RedditNotify extends BaseCommand
 			{
 				$this->push($submission);
 			}
+
+			// Mark is as notified as we go in case tasks are run in parallel
+			model(SubmissionModel::class)->update($submission->id, ['notified' => 1]);
 		}
 	}
 
@@ -56,6 +60,7 @@ class RedditNotify extends BaseCommand
 			'contact'     => 'Heroes Share',
 			'unsubscribe' => 'Reply with "Unsubscribe"',
 			'author'      => $submission->author,
+			'url'         => $submission->url,
 			'match'       => $submission->match,
 			'kind'        => $submission->kind,
 			'html'        => $submission->html,
