@@ -20,7 +20,7 @@ class Reddit extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $pattern = '/(Heroes.Share)|(HotsApi)|(Heroes.Profile)|(Hots.Logs)/i';
+	public $pattern = '/(Heroes.?Share)|(Hots.?Api)|(Heroes.?Profile)|(Hots.?Logs)/i';
 
 	/**
 	 * Directory for submission caching.
