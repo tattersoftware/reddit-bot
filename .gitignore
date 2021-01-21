@@ -64,23 +64,18 @@ writable/uploads/*
 !writable/uploads/index.html
 
 writable/debugbar/*
+writable/patches/*
 
 writable/database.db
 
 php_errors.log
-
-#-------------------------
-# User Guide Temp Files
-#-------------------------
-user_guide_src/build/*
-user_guide_src/cilexer/build/*
-user_guide_src/cilexer/dist/*
-user_guide_src/cilexer/pycilexer.egg-info/*
+public/error_log
 
 #-------------------------
 # Test Files
 #-------------------------
 tests/coverage*
+app/Commands/Test.php
 
 # Don't save phpunit under version control.
 phpunit
@@ -130,4 +125,6 @@ nb-configuration.xml
 /phpunit*.xml
 /.phpunit.*.cache
 
-app/Commands/Test.php
+#-------------------------
+# Sensitive Files
+#-------------------------

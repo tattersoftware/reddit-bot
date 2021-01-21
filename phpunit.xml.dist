@@ -41,17 +41,23 @@
 	</logging>
 
 	<php>
-		<server name="app.baseURL" value="https://heroesshare.net"/>
+		<env name="XDEBUG_MODE" value="coverage"/>
+		<server name="app.baseURL" value="http://example.com"/>
 
 		<!-- Directory containing phpunit.xml -->
 		<const name="HOMEPATH" value="./"/>
+
 		<!-- Directory containing the Paths config file -->
 		<const name="CONFIGPATH" value="./app/Config/"/>
+
 		<!-- Directory containing the front controller (index.php) -->
 		<const name="PUBLICPATH" value="./public/"/>
 
+		<!-- https://getcomposer.org/xdebug -->
+		<env name="COMPOSER_DISABLE_XDEBUG_WARN" value="1"/>
+
 		<!-- Database configuration -->
-		<!-- Uncomment to provide alternate testing database
+		<!-- Uncomment to use alternate testing database configuration
 		<env name="database.tests.hostname" value="localhost"/>
 		<env name="database.tests.database" value="tests"/>
 		<env name="database.tests.username" value="tests_user"/>
