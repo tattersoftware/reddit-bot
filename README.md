@@ -1,17 +1,16 @@
-# heroes-share-bot
-Bot for Heroes Share
+# reddit-bot
+Reddit Bot in PHP CodeIgniter 4
 
-[![](https://github.com/tattersoftware/heroes-share-bot/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/heroes-share-bot/actions?query=workflow%3A%22PHPUnit)
-[![](https://github.com/tattersoftware/heroes-share-bot/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/heroes-share-bot/actions?query=workflow%3A%22PHPStan)
+[![](https://github.com/tattersoftware/reddit-bot/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/reddit-bot/actions?query=workflow%3A%22PHPUnit)
+[![](https://github.com/tattersoftware/reddit-bot/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/reddit-bot/actions?query=workflow%3A%22PHPStan)
 
 ## Description
 
-**Heroes Share Bot** provides automation services for web and social applications related
-to Blizzard's "Heroes of the Storm".
+**Reddit Bot** provides PHP automation tools for Reddit, in CodeIgniter 4.
 
 ## Requirements
 
-**Heroes Share Bot** is built on version 4 of the CodeIgniter PHP framework. You will need
+**Reddit Bot** is built on version 4 of the CodeIgniter PHP framework. You will need
 to be sure your environment meets all the
 [system requirements](https://codeigniter4.github.io/CodeIgniter4/intro/requirements.html).
 Framework requirements may change but here is a good start:
@@ -69,16 +68,14 @@ configuration in **.env** as well:
 
 ## Usage
 
-### Reddit
-
-Subreddit monitoring happens in three stages, each corresponding to its own command. Launch
+Monitoring happens in three stages, each corresponding to its own command. Launch
 the commands from the CLI using [CodeIgniter's "spark"](https://codeigniter4.github.io/CodeIgniter4/cli/cli_commands.html).
 
-* Fetch: Scans **/r/heroesofthestorm** for new Submissions (Links/Posts and Comments). `php spark reddit:fetch`
-* Process: Filters cached submissions by the configured regex pattern (see **app/Config/Reddit.php**) and loads them into the database. `php spark reddit:process`
+* Fetch: Scans each SUbreddit for new Submissions (Links/Posts and Comments). `php spark reddit:fetch`
+* Process: Filters cached submissions by the configured regex patterns (see **app/Config/Reddit.php**) and loads them into the database. `php spark reddit:process`
 * Notify: Sends notifications by email or Pushover for submissions identified during Process. `php spark reddit:notify`
 
-> **Note**: The jobs are best run every minute by cron to get the latest results. They are intentionally split up to allow for job queuing.
+> **Note**: The jobs are best run every minute by cron to get the latest results. They are intentionally split up to allow for job queue distribution.
 
 ## Testing
 
