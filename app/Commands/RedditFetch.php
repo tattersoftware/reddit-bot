@@ -14,27 +14,12 @@ use Tatter\Reddit\Structures\Listing;
  * Fetches all new submission from the subreddit
  * and stores them into a flat file for processing.
  */
-class RedditFetch extends BaseCommand
+class RedditFetch extends RedditCommand
 {
-	protected $group       = 'Tasks';
 	protected $name        = 'reddit:fetch';
 	protected $description = 'Fetches new Reddit comments and posts since last run.';
 	protected $usage       = 'reddit:fetch';
 	protected $arguments   = [];
-
-	/**
-	 * Reddit API client
-	 *
-	 * @var Reddit
-	 */
-	protected $reddit;
-
-	/**
-	 * Directory for storing submissions
-	 *
-	 * @var string
-	 */
-	protected $directory;
 
 	/**
 	 * Recent submission names to skip
@@ -45,9 +30,6 @@ class RedditFetch extends BaseCommand
 
 	public function run(array $params = [])
 	{
-		$this->reddit    = service('Reddit');
-		$this->directory = rtrim(config('Reddit')->directory, '/ ') . DIRECTORY_SEPARATOR;
-
 		// Preload the most recent submissions that have already been processed
 		// to make sure we do not load them again
 		$this->submissions = model(SubmissionModel::class)
