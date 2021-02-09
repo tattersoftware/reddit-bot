@@ -55,6 +55,6 @@ abstract class RedditCommand extends BaseCommand
 
 		$this->reddit     = service('Reddit');
 		$this->directives = service('Handlers', 'Directives');
-		$this->directory  = WRITEPATH . 'submissions' . DIRECTORY_SEPARATOR;
+		$this->directory  = rtrim(config('Project')->submissionsPath, '/') . '/';
 	}
 }

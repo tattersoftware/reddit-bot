@@ -7,6 +7,7 @@ use Tatter\Reddit\Exceptions\RedditException;
 use Tatter\Reddit\Reddit;
 use Tatter\Reddit\Structures\Kind;
 use Tatter\Reddit\Structures\Listing;
+use RuntimeException;
 
 /**
  * Reddit Fetch Task
@@ -37,26 +38,45 @@ class RedditFetch extends RedditCommand
 			->limit(100)
 			->findColumn('name') ?? [];
 
-		// Check for new Links
-		$this->cacheSubmissions($this->fetchSubmissions('new', 'reddit_last_link'));
+		// Track Subreddits so we only poll them once
+		$subreddits = [];
+		foreach ($this->directives->findAll() as $class)
+		{
+			$directive = new $class();
+			foreach ($directive->subreddits as $subreddit)
+			{
+				if (in_array($subreddit, $subreddits))
+				{
+					continue;
+				}
+		
+				// Check for new Links
+				$this->write($this->fetch('r/' . $subreddit . '/new'));
 
-		// Check for new Comments
-		$this->cacheSubmissions($this->fetchSubmissions('comments', 'reddit_last_comment'));
+				// Check for new Comments
+				$this->write($this->fetch('r/' . $subreddit . '/comments'));
+
+				$subreddits[] = $subreddit;
+			}
+		}
 	}
 
 	/**
-	 * Fetches a Listing of new submissions
+	 * Fetches a Listing of new Things
 	 *
-	 * @param string $uri           URI to use for the submissions
-	 * @param string|null $cacheKey Cache key to use for the "before" query
+	 * @param string $uri URI to use for the submissions
 	 *
 	 * @return Listing $listing
 	 *
-	 * @throws \RuntimeException
+	 * @throws RuntimeException
 	 */
-	protected function fetchSubmissions(string $uri, string $cacheKey = null): Listing
+	protected function fetch(string $uri): Listing
 	{
-		if ($cacheKey && $before = cache($cacheKey))
+		// Create a cache-safe key
+		$cacheKey = preg_filter('/[^A-Za-z_]+/', '', $uri);
+
+		// Check for a previous request to follow
+		if ($before = cache($cacheKey))
 		{
 			$this->reddit->before($before);
 		}
@@ -64,11 +84,11 @@ class RedditFetch extends RedditCommand
 		$listing = $this->reddit->fetch($uri);
 		if (! $listing instanceof Listing)
 		{
-			throw new \RuntimeException('Unexpected result from Reddit API: ' . get_class($listing));
+			throw new RuntimeException('Unexpected result from Reddit API: ' . get_class($listing));
 		}
 
 		// Store the first result as the most recent
-		if ($cacheKey && $kind = $listing->current())
+		if ($kind = $listing->current())
 		{
 			/** @var Kind $kind */
 			cache()->save($cacheKey, $kind->name());
@@ -78,11 +98,11 @@ class RedditFetch extends RedditCommand
 	}
 
 	/**
-	 * Caches Things from an API Listing
+	 * Writes Things from an API Listing
 	 *
 	 * @param Listing $listing
 	 */
-	protected function cacheSubmissions(Listing $listing): void
+	protected function write(Listing $listing): void
 	{
 		/** @var Kind $kind */
 		foreach ($listing as $kind)

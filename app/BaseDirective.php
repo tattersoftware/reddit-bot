@@ -1,4 +1,4 @@
-<?php namespace App\Directives;
+<?php namespace App;
 
 use Tatter\Handlers\BaseHandler;
 
@@ -8,7 +8,7 @@ use Tatter\Handlers\BaseHandler;
  * Provides the template and common method basis
  * for building bot requests and responses.
  */
-abstract class Directive extends BaseHandler
+abstract class BaseDirective extends BaseHandler
 {
 	/**
 	 * Attributes for Tatter\Handlers
@@ -23,12 +23,12 @@ abstract class Directive extends BaseHandler
 	 * @var array<string, mixed>
 	 */
 	private $defaults = [
-		'name'      => '', // Name for this Action
-		'uid'       => '', // Unique identifier
-		'subreddit' => '', // The portion after "/r/"
-		'rate'      => MINUTE, // How frequently to check
-		'action'    => '', // Action to use in responding
-		'patterns'  => [], // Regex patterns to match
+		'name'       => '', // Name for this Action
+		'uid'        => '', // Unique identifier
+		'subreddits' => [], // Array of strings, the portion after "/r/"
+		'rate'       => MINUTE, // How frequently to check
+		'action'     => '', // Action to use in responding
+		'patterns'   => [], // Regex patterns to match
 	];
 
 	/**

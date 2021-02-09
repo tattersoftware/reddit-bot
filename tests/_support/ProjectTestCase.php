@@ -1,9 +1,10 @@
 <?php namespace Tests\Support;
 
+use App\Database\Seeds\InitialSeeder;
 use CodeIgniter\Config\Config;
 use CodeIgniter\Test\CIDatabaseTestCase;
 use CodeIgniter\Test\Filters\CITestStreamFilter;
-use Config\Reddit as RedditConfig;
+use Config\Project;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 
@@ -32,7 +33,7 @@ class ProjectTestCase extends CIDatabaseTestCase
 	 *
 	 * @var string|array
 	 */
-	protected $seed = 'App\Database\Seeds\InitialSeeder';
+	protected $seed = InitialSeeder::class;
 
 	/**
 	 * The path to the seeds directory.
@@ -69,9 +70,9 @@ class ProjectTestCase extends CIDatabaseTestCase
         vfsStream::copyFromFileSystem(SUPPORTPATH . 'submissions', $this->root);
 
 		// Configure for testing
-		$config            = new RedditConfig();
-		$config->directory = $this->root->url();
-		Config::injectMock('Reddit', $config);
+		$config                  = new Project();
+		$config->submissionsPath = $this->root->url();
+		Config::injectMock('Project', $config);
 
 		// Set up the stream filter so commands don't output
 		CITestStreamFilter::$buffer = '';

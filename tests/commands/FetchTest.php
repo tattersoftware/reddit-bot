@@ -27,10 +27,10 @@ class FetchTest extends ProjectTestCase
 
 	public function testFetchStoresAfterSetting()
 	{
-		$this->assertEmpty(cache('reddit_last_link'));
+		$this->assertEmpty(cache('rheroesofthestormnew'));
 
 		command('reddit:fetch');
-		$result = cache('reddit_last_link');
+		$result = cache('rheroesofthestormnew');
 
 		$this->assertNotEmpty($result);
 		$this->assertEquals(1, preg_match(Kind::NAME_REGEX, $result));
