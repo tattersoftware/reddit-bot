@@ -3,12 +3,12 @@
 use App\Entities\Submission;
 
 /**
- * Action Interface
+ * Email Action Class
  *
- * Handles responses defined by
- * a Directive.
+ * Sends an email with a summary of
+ * the provided Submission.
  */
-interface ActionInterface
+class EmailAction implements ActionInterface
 {
 	/**
 	 * Processes this Action for a specific Submission.
@@ -16,5 +16,7 @@ interface ActionInterface
 	 * @param Submission $submission
 	 * @param array $params Any additional parameters
 	 */
-	public function execute(Submission $submission, array $params = []);
+	public function execute(Submission $submission, array $params = [])
+	{
+	}
 }
