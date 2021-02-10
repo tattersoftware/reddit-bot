@@ -1,9 +1,9 @@
 <?php namespace Tests\Support\Directives;
 
-use App\Actions\EmailAction;
+use App\Actions\SessionAction;
 use App\BaseDirective;
 
-class HotsEmail extends BaseDirective
+class TestDirective extends BaseDirective
 {
 	/**
 	 * Attributes for Tatter\Handlers
@@ -11,16 +11,16 @@ class HotsEmail extends BaseDirective
 	 * @var array<string, mixed>      
 	 */
 	public $attributes = [
-		'name'       => 'Heroes of the Storm Emailer', // Name for this Action
-		'uid'        => 'hots_email', // Unique identifier
-		'subreddits' => ['heroesofthestorm'], // Array of strings, the portion after "/r/"
+		'name'       => 'Test Directive', // Name for this Action
+		'uid'        => 'test_directive', // Unique identifier
 		'rate'       => MINUTE, // How frequently to check
-		'action'     => EmailAction::class, // Action to use in responding
+		'subreddits' => ['heroesofthestorm'], // Array of strings, the portion after "/r/"
 		'patterns'   => [ // Regex patterns to match
 			'/Heroes.?Profile/i',
 			'/Heroes.?Share/',
 			'/Hots.?Api/i',
 			'/Hots.?Logs/i',
 		],
+		'actions'    => [SessionAction::class], // Actions to use during execution
 	];
 }
