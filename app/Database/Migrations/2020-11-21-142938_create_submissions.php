@@ -7,6 +7,8 @@ class CreateSubmissions extends Migration
 	public function up()
 	{
 		$fields = [
+			'directive'  => ['type' => 'varchar', 'constraint' => 63, 'null' => true],
+			'subreddit'  => ['type' => 'varchar', 'constraint' => 255, 'null' => true],
 			'kind'       => ['type' => 'varchar', 'constraint' => 15, 'null' => true],
 			'name'       => ['type' => 'varchar', 'constraint' => 15, 'null' => true],
 			'author'     => ['type' => 'varchar', 'constraint' => 255, 'null' => true],

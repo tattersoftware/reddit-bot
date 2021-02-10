@@ -54,11 +54,6 @@ class ProjectTestCase extends CIDatabaseTestCase
 	protected $namespace = null;
 
 	/**
-	 * @var RedditConfig
-	 */
-	protected $config;
-
-	/**
 	 * Mocks the configuration file and buffers output to the stream filter
 	 */
 	protected function setUp(): void
