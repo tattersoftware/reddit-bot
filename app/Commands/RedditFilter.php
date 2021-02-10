@@ -12,12 +12,12 @@ use Throwable;
  * on the configured criteria, notifying for matches
  * and removing cached files when done.
  */
-class RedditProcess extends RedditCommand
+class RedditFilter extends RedditCommand
 {
 	protected $group       = 'Tasks';
-	protected $name        = 'reddit:process';
-	protected $description = 'Process cached Reddit comments and posts.';
-	protected $usage       = 'reddit:process';
+	protected $name        = 'reddit:filter';
+	protected $description = 'Filter stored Reddit comments and posts.';
+	protected $usage       = 'reddit:filter';
 
 	public function run(array $params = [])
 	{
@@ -74,7 +74,7 @@ class RedditProcess extends RedditCommand
 				break;
 
 				default:
-					log_message('error', 'Unsupport Kind in Reddit Process:' . get_class($kind));
+					log_message('error', 'Unsupport Kind in Reddit Filter:' . get_class($kind));
 					CLI::write('Skipping unsupported Kind: ' . get_class($kind), 'red');
 					continue 2;
 			}

@@ -9,24 +9,24 @@ use Tatter\Outbox\Models\TemplateModel;
 use Tatter\Pushover\Exceptions\PushoverException;
 
 /**
- * Reddit Notify Task
+ * Reddit Execute Task
  *
  * Loads submissions from the database
- * that have not yet been notified and
+ * that have not yet been executed and
  * sends notifications from configured
  * handlers.
  */
-class RedditNotify extends BaseCommand
+class RedditExecute extends BaseCommand
 {
 	protected $group       = 'Tasks';
-	protected $name        = 'reddit:notify';
-	protected $description = 'Send notifications for matched Reddit submissions.';
-	protected $usage       = 'reddit:notify';
+	protected $name        = 'reddit:execute';
+	protected $description = 'Executes actions on filtered Reddit submissions.';
+	protected $usage       = 'reddit:execute';
 
 	public function run(array $params = [])
 	{
 		$notified = [];
-		foreach (model(SubmissionModel::class)->where('notified', 0)->findAll() as $submission)
+		foreach (model(SubmissionModel::class)->where('executed', 0)->findAll() as $submission)
 		{
 			CLI::write('Sending notifications for ' . $submission->name);
 
@@ -65,7 +65,7 @@ class RedditNotify extends BaseCommand
 			'kind'        => $submission->kind,
 			'html'        => $submission->html,
 			'thumbnail'   => filter_var($submission->thumbnail, FILTER_VALIDATE_URL) === false
-				? 'https://heroesshare.net/assets/img/logo-small.png'
+				? 'https://heroesshare.net/apple-touch-icon.png'
 				: $submission->thumbnail,
 		]);
 
