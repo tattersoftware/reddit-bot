@@ -1,9 +1,9 @@
 <?php namespace App\Commands;
 
 use App\Models\SubmissionModel;
-use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 use Tatter\Reddit\Structures\Kind;
+use Throwable;
 
 /**
  * Reddit Process Task
@@ -12,7 +12,7 @@ use Tatter\Reddit\Structures\Kind;
  * on the configured criteria, notifying for matches
  * and removing cached files when done.
  */
-class RedditProcess extends BaseCommand
+class RedditProcess extends RedditCommand
 {
 	protected $group       = 'Tasks';
 	protected $name        = 'reddit:process';
@@ -23,7 +23,7 @@ class RedditProcess extends BaseCommand
 	{
 		helper(['file', 'text']);
 
-		foreach (get_filenames(config('Reddit')->directory, true) as $file)
+		foreach (get_filenames(config('Project')->submissionsPath, true) as $file)
 		{
 			if (basename($file) === 'index.html')
 			{
@@ -37,39 +37,40 @@ class RedditProcess extends BaseCommand
 				/** @var Kind $kind */
 				$kind = unserialize($contents);
 			}
-			catch (\Throwable $e)
+			catch (Throwable $e)
 			{
 				CLI::write('Error processing ' . basename($file) . ': ' . $e->getMessage());
 				continue;
 			}
 
 			// Convert the Kind to Submission
-			$submission = [];
+			$submission = [
+				'subreddit' => $kind->subreddit,
+				'kind'      => (string) $kind,
+				'name'      => $kind->name(),
+				'author'    => $kind->author,
+			];
+
+			// Add Kind-specific fields
 			switch ((string) $kind)
 			{
 				case 'Comment':
-					$submission = [
-						'kind'      => (string) $kind,
-						'name'      => $kind->name(),
-						'author'    => $kind->author,
+					$submission = array_merge($submission, [
 						'url'       => $kind->link_url . $kind->id,
 						'title'     => $kind->link_title,
 						'body'      => $kind->body,
 						'html'      => $kind->body_html,
-					];
+					]);
 				break;
 
 				case 'Link':
-					$submission = [
-						'kind'      => (string) $kind,
-						'name'      => $kind->name(),
-						'author'    => $kind->author,
+					$submission = array_merge($submission, [
 						'url'       => $kind->url,
 						'thumbnail' => $kind->thumbnail,
 						'title'     => $kind->title,
 						'body'      => $kind->selftext,
 						'html'      => $kind->selftext_html,
-					];
+					]);
 				break;
 
 				default:
@@ -80,18 +81,37 @@ class RedditProcess extends BaseCommand
 
 			// Remove newlines to improve pattern matching.
 			$search = trim(preg_replace('/\s+/', ' ', $submission['title'] . ' ' . $submission['body']));
-			if (preg_match(config('Reddit')->pattern, $search, $matches))
+
+			// Check each Directive for a match
+			foreach ($this->directives as $directive)
 			{
-				// Gather the excerpt
-				$submission['match']   = $matches[0];
-				$submission['excerpt'] = excerpt($search, $submission['match']);
+				// Make sure this is a subreddit for this Directive
+				if (! in_array($submission['subreddit'], $directive->subreddits))
+				{
+					continue;
+				}
 
-				// Print the header and highlighted version
-				CLI::write($submission['kind'] . ' ' . $submission['name'] . ' ' . $submission['title'], 'green');
-				CLI::write(highlight_phrase($submission['excerpt'], $submission['match'], "\033[0;33m", "\033[0m"));
+				// Check each pattern individually so we can highlight the first match
+				foreach ($directive->patterns as $pattern)
+				{
+					if (preg_match($pattern, $search, $matches))
+					{
+						// Gather the excerpt
+						$submission['directive'] = $directive->uid;
+						$submission['match']     = $matches[0];
+						$submission['excerpt']   = excerpt($search, $submission['match']);
 
-				// Insert it into the database
-				model(SubmissionModel::class)->insert($submission);
+						// Print the header and highlighted version
+						CLI::write($submission['kind'] . ' ' . $submission['name'] . ' ' . $submission['title'], 'green');
+						CLI::write(highlight_phrase($submission['excerpt'], $submission['match'], "\033[0;33m", "\033[0m"));
+
+						// Insert it into the database
+						model(SubmissionModel::class)->insert($submission);
+
+						// Skip to the next Directive
+						continue 2;
+					}
+				}
 			}
 
 			// Remove the file so it is not processed again

@@ -1,10 +1,7 @@
 <?php namespace App\Commands;
 
 use App\Models\SubmissionModel;
-use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
-use Tatter\Reddit\Exceptions\RedditException;
-use Tatter\Reddit\Reddit;
 use Tatter\Reddit\Structures\Kind;
 use Tatter\Reddit\Structures\Listing;
 use RuntimeException;
@@ -40,9 +37,8 @@ class RedditFetch extends RedditCommand
 
 		// Track Subreddits so we only poll them once
 		$subreddits = [];
-		foreach ($this->directives->findAll() as $class)
+		foreach ($this->directives as $directive)
 		{
-			$directive = new $class();
 			foreach ($directive->subreddits as $subreddit)
 			{
 				if (in_array($subreddit, $subreddits))
