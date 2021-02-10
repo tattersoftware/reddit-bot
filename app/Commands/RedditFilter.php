@@ -43,50 +43,17 @@ class RedditFilter extends RedditCommand
 				continue;
 			}
 
-			// Convert the Kind to Submission
-			$submission = [
-				'subreddit' => $kind->subreddit,
-				'kind'      => (string) $kind,
-				'name'      => $kind->name(),
-				'author'    => $kind->author,
-			];
-
-			// Add Kind-specific fields
-			switch ((string) $kind)
-			{
-				case 'Comment':
-					$submission = array_merge($submission, [
-						'url'       => $kind->link_url . $kind->id,
-						'title'     => $kind->link_title,
-						'body'      => $kind->body,
-						'html'      => $kind->body_html,
-					]);
-				break;
-
-				case 'Link':
-					$submission = array_merge($submission, [
-						'url'       => $kind->url,
-						'thumbnail' => $kind->thumbnail,
-						'title'     => $kind->title,
-						'body'      => $kind->selftext,
-						'html'      => $kind->selftext_html,
-					]);
-				break;
-
-				default:
-					log_message('error', 'Unsupport Kind in Reddit Filter:' . get_class($kind));
-					CLI::write('Skipping unsupported Kind: ' . get_class($kind), 'red');
-					continue 2;
-			}
+			// Convert the Kind to a Submission row
+			$row = model(SubmissionModel::class)->fromKind($kind);
 
 			// Remove newlines to improve pattern matching.
-			$search = trim(preg_replace('/\s+/', ' ', $submission['title'] . ' ' . $submission['body']));
+			$search = trim(preg_replace('/\s+/', ' ', $row['title'] . ' ' . $row['body']));
 
 			// Check each Directive for a match
 			foreach ($this->directives as $directive)
 			{
 				// Make sure this is a subreddit for this Directive
-				if (! in_array($submission['subreddit'], $directive->subreddits))
+				if (! in_array($row['subreddit'], $directive->subreddits))
 				{
 					continue;
 				}
@@ -97,16 +64,16 @@ class RedditFilter extends RedditCommand
 					if (preg_match($pattern, $search, $matches))
 					{
 						// Gather the excerpt
-						$submission['directive'] = $directive->uid;
-						$submission['match']     = $matches[0];
-						$submission['excerpt']   = excerpt($search, $submission['match']);
+						$row['directive'] = $directive->uid;
+						$row['match']     = $matches[0];
+						$row['excerpt']   = excerpt($search, $submission['match']);
 
 						// Print the header and highlighted version
-						CLI::write($submission['kind'] . ' ' . $submission['name'] . ' ' . $submission['title'], 'green');
-						CLI::write(highlight_phrase($submission['excerpt'], $submission['match'], "\033[0;33m", "\033[0m"));
+						CLI::write($row['kind'] . ' ' . $row['name'] . ' ' . $row['title'], 'green');
+						CLI::write(highlight_phrase($row['excerpt'], $row['match'], "\033[0;33m", "\033[0m"));
 
 						// Insert it into the database
-						model(SubmissionModel::class)->insert($submission);
+						model(SubmissionModel::class)->insert($row);
 
 						// Skip to the next Directive
 						continue 2;

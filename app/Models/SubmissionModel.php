@@ -2,6 +2,7 @@
 
 use App\Entities\Submission;
 use CodeIgniter\Model;
+use Tatter\Reddit\Structures\Kind;
 
 class SubmissionModel extends Model
 {
@@ -26,4 +27,49 @@ class SubmissionModel extends Model
 		'excerpt',
 		'notified',
 	];
+
+	/**
+	 * Converts a Kind to an array for Submissions
+	 *
+	 * @param Kind $kind
+	 *
+	 * @return array
+	 */
+	public function fromKind(Kind $kind): array
+	{
+		$row = [
+			'subreddit' => $kind->subreddit,
+			'kind'      => (string) $kind,
+			'name'      => $kind->name(),
+			'author'    => $kind->author,
+		];
+
+		// Add Kind-specific fields
+		switch ((string) $kind)
+		{
+			case 'Comment':
+				$row = array_merge($row, [
+					'url'       => $kind->link_url . $kind->id,
+					'title'     => $kind->link_title,
+					'body'      => $kind->body,
+					'html'      => $kind->body_html,
+				]);
+			break;
+
+			case 'Link':
+				$row = array_merge($row, [
+					'url'       => $kind->url,
+					'thumbnail' => $kind->thumbnail,
+					'title'     => $kind->title,
+					'body'      => $kind->selftext,
+					'html'      => $kind->selftext_html,
+				]);
+			break;
+
+			default:
+				throw new RuntimeError('Unsupport Kind:' . get_class($kind));
+		}
+
+		return $row;
+	}
 }
