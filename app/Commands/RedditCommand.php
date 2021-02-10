@@ -1,5 +1,6 @@
 <?php namespace App\Commands;
 
+use App\BaseDirective;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\Commands;
 use Psr\Log\LoggerInterface;
@@ -30,11 +31,11 @@ abstract class RedditCommand extends BaseCommand
 	protected $reddit;
 
 	/**
-	 * Handler instance for Directives
+	 * Directives instances from Handlers
 	 *
-	 * @var Handlers
+	 * @var BaseDirective[]
 	 */
-	protected $directives;
+	protected $directives = [];
 
 	/**
 	 * Directory for storing submissions
@@ -53,8 +54,12 @@ abstract class RedditCommand extends BaseCommand
 	{
 		parent::__construct($logger, $commands);
 
-		$this->reddit     = service('Reddit');
-		$this->directives = service('Handlers', 'Directives');
-		$this->directory  = rtrim(config('Project')->submissionsPath, '/') . '/';
+		$this->reddit    = service('Reddit');
+		$this->directory = rtrim(config('Project')->submissionsPath, '/') . '/';
+
+		foreach (service('Handlers', 'Directives')->findAll() as $class)
+		{
+			$this->directives[] = new $class();
+		}
 	}
 }
