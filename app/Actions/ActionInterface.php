@@ -1,6 +1,7 @@
 <?php namespace App\Actions;
 
 use App\Entities\Submission;
+use RuntimeException;
 
 /**
  * Action Interface
@@ -15,6 +16,8 @@ interface ActionInterface
 	 *
 	 * @param Submission $submission
 	 * @param array $params Any additional parameters
+	 *
+	 * @throws RuntimeException for any failures
 	 */
 	public function execute(Submission $submission, array $params = []);
 }

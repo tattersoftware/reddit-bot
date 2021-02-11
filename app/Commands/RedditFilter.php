@@ -66,7 +66,7 @@ class RedditFilter extends RedditCommand
 						// Gather the excerpt
 						$row['directive'] = $directive->uid;
 						$row['match']     = $matches[0];
-						$row['excerpt']   = excerpt($search, $submission['match']);
+						$row['excerpt']   = excerpt($search, $row['match']);
 
 						// Print the header and highlighted version
 						CLI::write($row['kind'] . ' ' . $row['name'] . ' ' . $row['title'], 'green');

@@ -33,7 +33,7 @@ abstract class RedditCommand extends BaseCommand
 	/**
 	 * Directives instances from Handlers
 	 *
-	 * @var BaseDirective[]
+	 * @var array<string,BaseDirective>
 	 */
 	protected $directives = [];
 
@@ -59,7 +59,8 @@ abstract class RedditCommand extends BaseCommand
 
 		foreach (service('Handlers', 'Directives')->findAll() as $class)
 		{
-			$this->directives[] = new $class();
+			$directive = new $class();
+			$this->directives[$directive->uid] = $directive;
 		}
 	}
 }

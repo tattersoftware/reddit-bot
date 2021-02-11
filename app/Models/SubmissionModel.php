@@ -3,6 +3,7 @@
 use App\Entities\Submission;
 use CodeIgniter\Model;
 use Tatter\Reddit\Structures\Kind;
+use RuntimeException;
 
 class SubmissionModel extends Model
 {
@@ -15,6 +16,8 @@ class SubmissionModel extends Model
 	protected $skipValidation = true;
 
 	protected $allowedFields = [
+		'directive',
+		'subreddit',
 		'kind',
 		'name',
 		'author',
@@ -25,7 +28,7 @@ class SubmissionModel extends Model
 		'html',
 		'match',
 		'excerpt',
-		'notified',
+		'executed_at',
 	];
 
 	/**
@@ -34,6 +37,8 @@ class SubmissionModel extends Model
 	 * @param Kind $kind
 	 *
 	 * @return array
+	 *
+	 * @throws RuntimeException for Kind that is not a Comment or Link
 	 */
 	public function fromKind(Kind $kind): array
 	{
@@ -67,7 +72,7 @@ class SubmissionModel extends Model
 			break;
 
 			default:
-				throw new RuntimeError('Unsupport Kind:' . get_class($kind));
+				throw new RuntimeException('Unsupport Kind:' . get_class($kind));
 		}
 
 		return $row;
