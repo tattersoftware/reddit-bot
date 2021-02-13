@@ -32,6 +32,8 @@ class EmailAction implements ActionInterface
 	 * @param Submission $submission
 	 * @param array $params Any additional parameters
 	 *
+	 * @return mixed Mostly for testing
+	 *
 	 * @throws RuntimeException for any failures
 	 */
 	public function execute(Submission $submission, array $params = [])
@@ -66,5 +68,7 @@ class EmailAction implements ActionInterface
 		{
 			throw new RuntimeException('Unable to send the email: ' . $email->printDebugger());
 		}
+
+		return $email;
 	}
 }

@@ -2,8 +2,9 @@
 
 use App\Entities\Submission;
 use CodeIgniter\Email\Email;
+use CodeIgniter\HTTP\ResponseInterface;
 use Config\Services;
-use Tatter\Outbox\Models\TemplateModel;
+use Tatter\Pushover\Entities\Message;
 use RuntimeException;
 
 /**
@@ -20,9 +21,11 @@ class PushAction implements ActionInterface
 	 * @param Submission $submission
 	 * @param array $params Any additional parameters
 	 *
+	 * @return Message Mostly for testing
+	 *
 	 * @throws RuntimeException for any failures (PushoverException)
 	 */
-	public function execute(Submission $submission, array $params = [])
+	public function execute(Submission $submission, array $params = []): Message
 	{
 		// Apply any overrides to the config
 		$config = config('Pushover');
@@ -63,5 +66,6 @@ class PushAction implements ActionInterface
 		}
 
 		$message->send();
+		return $message;
 	}
 }
