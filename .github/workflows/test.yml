@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        php-versions: ['7.4', '8.0']
+        php-versions: ['7.3', '7.4', '8.0']
 
     runs-on: ubuntu-latest
 
@@ -59,18 +59,12 @@ jobs:
           pushover.user: ${{ secrets.PUSHOVER_USER }}
           pushover.token: ${{ secrets.PUSHOVER_TOKEN }}
 
-      - name: Mutate with Infection
+      - if: matrix.php-versions == '8.0'
+        name: Mutate with Infection
         run: |
+          composer global require infection/infection
           git fetch --depth=1 origin $GITHUB_BASE_REF
-          php vendor/bin/infection --threads=2 --coverage=build/phpunit --git-diff-base=origin/$GITHUB_BASE_REF --git-diff-filter=AM --logger-github --min-msi=80
-        env:
-          TERM: xterm-256color
-          reddit.clientId: ${{ secrets.REDDIT_CLIENT_ID }}
-          reddit.clientSecret: ${{ secrets.REDDIT_CLIENT_SECRET }}
-          reddit.username: ${{ secrets.REDDIT_USERNAME }}
-          reddit.password: ${{ secrets.REDDIT_PASSWORD }}
-          pushover.user: ${{ secrets.PUSHOVER_USER }}
-          pushover.token: ${{ secrets.PUSHOVER_TOKEN }}
+          infection --threads=2 --coverage=build/phpunit --git-diff-base=origin/$GITHUB_BASE_REF --git-diff-filter=AM --logger-github
 
       - if: matrix.php-versions == '8.0'
         name: Run Coveralls
@@ -82,9 +76,10 @@ jobs:
 
   coveralls:
     needs: [main]
+    name: Coveralls Finished
     runs-on: ubuntu-latest
     steps:
-      - name: Coveralls Finished
+      - name: Upload Coveralls results
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
