@@ -62,7 +62,15 @@ jobs:
       - name: Mutate with Infection
         run: |
           git fetch --depth=1 origin $GITHUB_BASE_REF
-          php vendor/bin/infection --threads=2 --git-diff-base=origin/$GITHUB_BASE_REF --git-diff-filter=AM --logger-github --min-msi=80
+          php vendor/bin/infection --threads=2 --coverage=build/phpunit --git-diff-base=origin/$GITHUB_BASE_REF --git-diff-filter=AM --logger-github --min-msi=80
+        env:
+          TERM: xterm-256color
+          reddit.clientId: ${{ secrets.REDDIT_CLIENT_ID }}
+          reddit.clientSecret: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          reddit.username: ${{ secrets.REDDIT_USERNAME }}
+          reddit.password: ${{ secrets.REDDIT_PASSWORD }}
+          pushover.user: ${{ secrets.PUSHOVER_USER }}
+          pushover.token: ${{ secrets.PUSHOVER_TOKEN }}
 
       - if: matrix.php-versions == '8.0'
         name: Run Coveralls
