@@ -27,6 +27,11 @@ class FetchTest extends ProjectTestCase
 
 	public function testFetchStoresAfterSetting()
 	{
+		if (config('Reddit')->username === '')
+		{
+			$this->markTestSkipped('This test requires valid Reddit credentials.');
+		}
+
 		$this->assertEmpty(cache('rheroesofthestormnew'));
 
 		command('reddit:fetch');
