@@ -16,7 +16,7 @@
 <p>
   The full post is below. Thank you for using this service!
   <br>
-  -Heroes Share Bot
+  -RedditBot
 </p>
 <hr>
 

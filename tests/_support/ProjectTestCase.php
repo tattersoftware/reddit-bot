@@ -1,10 +1,13 @@
 <?php namespace Tests\Support;
 
 use App\Database\Seeds\InitialSeeder;
+use App\Entities\Submission;
+use App\Models\SubmissionModel;
 use CodeIgniter\Config\Config;
 use CodeIgniter\Test\CIDatabaseTestCase;
 use CodeIgniter\Test\Filters\CITestStreamFilter;
 use Config\Project;
+use Tatter\Reddit\Structures\Kind;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 
@@ -80,5 +83,26 @@ class ProjectTestCase extends CIDatabaseTestCase
 		stream_filter_remove($this->streamFilter);
 
 		$this->root = null;
+	}
+
+	/**
+	 * Creates a Submission to test with from
+	 * one of the support files.
+	 *
+	 * @return Submission
+	 */
+	protected function getSubmission($file = 't3_jxwuze'): Submission
+	{
+		$contents = file_get_contents(SUPPORTPATH . 'submissions' . DIRECTORY_SEPARATOR . $file);
+
+		/** @var Kind $kind */
+		$kind = unserialize($contents);
+
+		$row = model(SubmissionModel::class)->fromKind($kind);
+		$row['directive'] = 'test_directive';
+		$row['match']     = 'Test Match';
+		$row['excerpt']   = 'Something something Test Match foo bar bam...';
+
+		return new Submission($row);
 	}
 }

@@ -14,7 +14,7 @@ class Email extends BaseConfig
 	/**
 	 * @var string
 	 */
-	public $fromName = 'Heroes Share Bot';
+	public $fromName = 'RedditBot';
 
 	/**
 	 * @var string

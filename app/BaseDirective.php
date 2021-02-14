@@ -25,10 +25,10 @@ abstract class BaseDirective extends BaseHandler
 	private $defaults = [
 		'name'       => '', // Name for this Action
 		'uid'        => '', // Unique identifier
-		'subreddits' => [], // Array of strings, the portion after "/r/"
 		'rate'       => MINUTE, // How frequently to check
-		'action'     => '', // Action to use in responding
+		'subreddits' => [], // Array of strings, the portion after "/r/"
 		'patterns'   => [], // Regex patterns to match
+		'actions'    => [], // Actions to use during execution
 	];
 
 	/**
