@@ -60,13 +60,6 @@ jobs:
           pushover.token: ${{ secrets.PUSHOVER_TOKEN }}
 
       - if: matrix.php-versions == '8.0'
-        name: Mutate with Infection
-        run: |
-          composer global require infection/infection
-          git fetch --depth=1 origin $GITHUB_BASE_REF
-          infection --threads=2 --coverage=build/phpunit --git-diff-base=origin/$GITHUB_BASE_REF --git-diff-filter=AM --logger-github
-
-      - if: matrix.php-versions == '8.0'
         name: Run Coveralls
         run: vendor/bin/php-coveralls --verbose --coverage_clover=build/phpunit/clover.xml --json_path build/phpunit/coveralls-upload.json
         env:
