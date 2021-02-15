@@ -31,9 +31,9 @@ class RedditExecute extends RedditCommand
 				throw new RuntimeException('Unknown Directive: ' . $submission->directive);
 			}
 
-			foreach ($this->directives[$submission->directive]->actions as $class)
+			foreach ($this->directives[$submission->directive]->actions as $i => $class)
 			{
-				(new $class)->execute($submission);
+				(new $class)->execute($submission, $directive->params[$i] ?? []);
 			}
 
 			// Mark them as executed as we go in case tasks are run in parallel

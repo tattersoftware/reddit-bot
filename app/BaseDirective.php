@@ -29,6 +29,7 @@ abstract class BaseDirective extends BaseHandler
 		'subreddits' => [], // Array of strings, the portion after "/r/"
 		'patterns'   => [], // Regex patterns to match
 		'actions'    => [], // Actions to use during execution
+		'params'     => [], // Arrays of parameters to pass to each Action
 	];
 
 	/**

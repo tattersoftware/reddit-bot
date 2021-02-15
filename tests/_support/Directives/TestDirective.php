@@ -22,5 +22,6 @@ class TestDirective extends BaseDirective
 			'/Hots.?Logs/i',
 		],
 		'actions'    => [SessionAction::class], // Actions to use during execution
+		'params'     => [], // Arrays of parameters to pass to each Action
 	];
 }
