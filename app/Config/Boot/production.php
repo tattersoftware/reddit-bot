@@ -1,5 +1,7 @@
 <?php
 
+use Sentry\Integration\IgnoreErrorsIntegration;
+
 /*
  |--------------------------------------------------------------------------
  | ERROR DISPLAY
@@ -19,3 +21,21 @@ error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE &
  | release of the framework.
  */
 defined('CI_DEBUG') || define('CI_DEBUG', false);
+
+/*
+ *---------------------------------------------------------------
+ * SENTRY.IO
+ *---------------------------------------------------------------
+ * Initialize Sentry for exception reporting.
+ */
+if (getenv('sentry.dsn'))
+{
+	Sentry\init([
+		'dsn'          => getenv('sentry.dsn'),
+		'integrations' => [
+			new IgnoreErrorsIntegration([
+				'ignore_exceptions' => ['CodeIgniter\Exceptions\PageNotFoundException'],
+			]),
+		],
+	]);
+}
