@@ -27,7 +27,7 @@ class CreateSubmissions extends Migration
 		$this->forge->addField('id');
 		$this->forge->addField($fields);
 
-		$this->forge->addUniqueKey('name');
+		$this->forge->addKey('name');
 		$this->forge->addKey('created_at');
 		$this->forge->addKey('executed_at');
 		
