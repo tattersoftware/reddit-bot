@@ -1,16 +1,16 @@
 # reddit-bot
-Reddit Bot in PHP CodeIgniter 4
+Reddit bot in PHP CodeIgniter 4
 
 [![](https://github.com/tattersoftware/reddit-bot/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/reddit-bot/actions?query=workflow%3A%22PHPUnit)
 [![](https://github.com/tattersoftware/reddit-bot/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/reddit-bot/actions?query=workflow%3A%22PHPStan)
 
 ## Description
 
-**Reddit Bot** provides PHP automation tools for Reddit, in CodeIgniter 4.
+**RedditBot** provides PHP automation tools for Reddit, in CodeIgniter 4.
 
 ## Requirements
 
-**Reddit Bot** is built on version 4 of the CodeIgniter PHP framework. You will need
+**RedditBot** is built on version 4 of the CodeIgniter PHP framework. You will need
 to be sure your environment meets all the
 [system requirements](https://codeigniter4.github.io/CodeIgniter4/intro/requirements.html).
 Framework requirements may change but here is a good start:
@@ -63,17 +63,48 @@ reddit.password = ReallySecurePassword321
 If you want to use any of these optional extensions you will need to supply their
 configuration in **.env** as well:
 
-1. Sentry.io (exception tracking): Fill `sentry.dsn` from the Sentry.io Project Settings (if you want to use exception reporting)
-2. Pushover: Fill `pushover.user` and `pushover.token` from the Pushover Client page for your desired device
+1. Email: Fill in the Email section with the specifics of your server's configuration
+2. Sentry.io (exception tracking): Fill `sentry.dsn` from the Sentry.io Project Settings (if you want to use exception reporting)
+3. Pushover: Fill `pushover.user` and `pushover.token` from the Pushover Client page for your desired device
+
+## Directives
+
+`Directives` are classes that direct the bot's interactions with Reddit. All `Directives` must be in a namespace's
+**Directives** subfolder and extend `App\BaseDirective`. A `Directive` is configured by supplying its attributes:
+
+* `name`: A display-friendly name
+* `uid`: A Unique identifier
+* `subreddits`: An array of Subreddits to check
+* `patterns`: An array of regex patterns to match in Submission content
+* `actions`: An array of `BaseAction` classes (`EmailAction` and `PushAction` come by default)
+* `params`: Additional parameters to pass to each Action
+
+For example, to get an email and push notification every time "CodeIgniter" is mentioned
+on **r/PHP** you might use something like this:
+```
+protected $attributes = [
+	'name'       => 'CodeIgniter on r/PHP',
+	'uid'        => 'ci_php',
+	'subreddits' => ['PHP'],
+	'patterns'   => ['/CodeIgniter/i'],
+	'actions'    => [
+		'App\Actions\EmailAction',
+		'App\Actions\PushoverAction'],
+	'params'     => [
+		['recipients' => 'my.email.address@example.com'],
+		['html' => 1],
+	]
+];
+```
 
 ## Usage
 
 Monitoring happens in three stages, each corresponding to its own command. Launch
 the commands from the CLI using [CodeIgniter's "spark"](https://codeigniter4.github.io/CodeIgniter4/cli/cli_commands.html).
 
-* Fetch: Scans each SUbreddit for new Submissions (Links/Posts and Comments). `php spark reddit:fetch`
-* Process: Filters cached submissions by the configured regex patterns (see **app/Config/Reddit.php**) and loads them into the database. `php spark reddit:process`
-* Notify: Sends notifications by email or Pushover for submissions identified during Process. `php spark reddit:notify`
+* Fetch: Scans for Directives and fetches their Submissions (Links/Posts and Comments), storing them locally as flat files. `php spark reddit:fetch`
+* Filter: Filters stored submissions by the Directive regex patterns and loads them into the database. `php spark reddit:filter`
+* Execute: Iterates through matched Submissions and runs the Directive's Action (e.g. notifications or responses). `php spark reddit:execute`
 
 > **Note**: The jobs are best run every minute by cron to get the latest results. They are intentionally split up to allow for job queue distribution.
 
