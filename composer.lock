@@ -2304,21 +2304,21 @@
         },
         {
             "name": "tatter/outbox",
-            "version": "v2.0.3",
+            "version": "v2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tattersoftware/codeigniter4-outbox.git",
-                "reference": "5f3dbcaa726257423ba369c070746dec8609b02f"
+                "reference": "d8e51ce48c7bcdbd8f37c3347c43bafc4eaa59e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-outbox/zipball/5f3dbcaa726257423ba369c070746dec8609b02f",
-                "reference": "5f3dbcaa726257423ba369c070746dec8609b02f",
+                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-outbox/zipball/d8e51ce48c7bcdbd8f37c3347c43bafc4eaa59e1",
+                "reference": "d8e51ce48c7bcdbd8f37c3347c43bafc4eaa59e1",
                 "shasum": ""
             },
             "require": {
                 "components/jquery": "^3.3",
-                "php": ">=7.2",
+                "php": "^7.3 || ^8.0",
                 "tatter/assets": "^2.2",
                 "tijsverkoyen/css-to-inline-styles": "^2.2",
                 "twbs/bootstrap": "^4.5"
@@ -2326,13 +2326,16 @@
             "require-dev": {
                 "codeigniter4/codeigniter4": "dev-develop",
                 "myth/auth": "dev-develop",
-                "tatter/tools": "^1.2"
+                "tatter/tools": "^1.6"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "Tatter\\Outbox\\": "src"
-                }
+                },
+                "exclude-from-classmap": [
+                    "**/Database/Migrations/**"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -2358,9 +2361,19 @@
             ],
             "support": {
                 "issues": "https://github.com/tattersoftware/codeigniter4-outbox/issues",
-                "source": "https://github.com/tattersoftware/codeigniter4-outbox/tree/v2.0.3"
+                "source": "https://github.com/tattersoftware/codeigniter4-outbox/tree/v2.0.4"
             },
-            "time": "2020-11-10T15:38:54+00:00"
+            "funding": [
+                {
+                    "url": "https://paypal.me/tatter",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/tattersoftware",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-02-16T01:08:43+00:00"
         },
         {
             "name": "tatter/pushover",
