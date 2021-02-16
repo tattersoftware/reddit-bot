@@ -7479,16 +7479,16 @@
         },
         {
             "name": "tatter/tools",
-            "version": "v1.6.1",
+            "version": "v1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tattersoftware/codeigniter4-tools.git",
-                "reference": "69763f39235909b22b9856376ec2038384e387aa"
+                "reference": "540ad3937825c77c55c529e16eb592a447220b9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-tools/zipball/69763f39235909b22b9856376ec2038384e387aa",
-                "reference": "69763f39235909b22b9856376ec2038384e387aa",
+                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-tools/zipball/540ad3937825c77c55c529e16eb592a447220b9a",
+                "reference": "540ad3937825c77c55c529e16eb592a447220b9a",
                 "shasum": ""
             },
             "require": {
@@ -7539,7 +7539,7 @@
             ],
             "support": {
                 "issues": "https://github.com/tattersoftware/codeigniter4-tools/issues",
-                "source": "https://github.com/tattersoftware/codeigniter4-tools/tree/v1.6.1"
+                "source": "https://github.com/tattersoftware/codeigniter4-tools/tree/v1.6.2"
             },
             "funding": [
                 {
@@ -7551,7 +7551,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-02-13T14:59:56+00:00"
+            "time": "2021-02-15T23:34:07+00:00"
         },
         {
             "name": "theseer/tokenizer",
