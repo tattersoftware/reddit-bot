@@ -47,6 +47,8 @@ class SubmissionModel extends Model
 			'kind'      => (string) $kind,
 			'name'      => $kind->name(),
 			'author'    => $kind->author,
+			'url'       => 'https://www.reddit.com' . $kind->permalink,
+			'thumbnail' => filter_var($kind->thumbnail ?? '', FILTER_VALIDATE_URL) ? $kind->thumbnail : null,
 		];
 
 		// Add Kind-specific fields
@@ -54,7 +56,6 @@ class SubmissionModel extends Model
 		{
 			case 'Comment':
 				$row = array_merge($row, [
-					'url'       => $kind->link_url . $kind->id,
 					'title'     => $kind->link_title,
 					'body'      => $kind->body,
 					'html'      => $kind->body_html,
@@ -63,8 +64,6 @@ class SubmissionModel extends Model
 
 			case 'Link':
 				$row = array_merge($row, [
-					'url'       => $kind->url,
-					'thumbnail' => $kind->thumbnail,
 					'title'     => $kind->title,
 					'body'      => $kind->selftext,
 					'html'      => $kind->selftext_html,
