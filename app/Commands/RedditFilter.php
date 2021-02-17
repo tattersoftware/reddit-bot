@@ -46,8 +46,11 @@ class RedditFilter extends RedditCommand
 			// Convert the Kind to a Submission row
 			$row = model(SubmissionModel::class)->fromKind($kind);
 
-			// Remove newlines to improve pattern matching.
-			$search = trim(preg_replace('/\s+/', ' ', $row['title'] . ' ' . $row['body']));
+			// Include titles of Links
+			$search = $row['kind'] === 'Link' ? $row['title'] . ' ' . $row['body'] : $row['body'];
+
+			// Remove newlines to improve pattern matching
+			$search = trim(preg_replace('/\s+/', ' ', $search));
 
 			// Check each Directive for a match
 			foreach ($this->directives as $directive)
