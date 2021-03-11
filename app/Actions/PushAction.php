@@ -43,7 +43,7 @@ class PushAction implements ActionInterface
 			'message'   => $submission->excerpt,
 			'html'      => 0,
 			'url'       => $submission->url,
-			'url_title' => $submission->title,
+			'url_title' => substr($submission->title, 0, 99), // Pushover's limit
 		];
 		$data = array_merge($data, $params['data'] ?? []);
 
