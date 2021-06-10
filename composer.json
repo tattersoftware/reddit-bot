@@ -25,10 +25,10 @@
 		"tatter/handlers": "^2.1",
 		"tatter/outbox": "^2.0",
 		"tatter/pushover": "^1.0",
-		"tatter/reddit": "^1.0"
+		"tatter/reddit": "^1.0",
+		"tatter/patches": "^2.0"
 	},
 	"require-dev": {
-		"tatter/patches": "^1.1",
 		"tatter/tools": "^1.6"
 	},
 	"autoload": {
