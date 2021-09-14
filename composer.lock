@@ -2256,16 +2256,16 @@
         },
         {
             "name": "tatter/handlers",
-            "version": "v2.2.0",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tattersoftware/codeigniter4-handlers.git",
-                "reference": "f5fc3ce86377ad861950f9bdffc023bfe39fc1f8"
+                "reference": "bd86605017cc930dce6b4ec0b8c6e78dd9404b69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-handlers/zipball/f5fc3ce86377ad861950f9bdffc023bfe39fc1f8",
-                "reference": "f5fc3ce86377ad861950f9bdffc023bfe39fc1f8",
+                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-handlers/zipball/bd86605017cc930dce6b4ec0b8c6e78dd9404b69",
+                "reference": "bd86605017cc930dce6b4ec0b8c6e78dd9404b69",
                 "shasum": ""
             },
             "require": {
@@ -2273,7 +2273,7 @@
             },
             "require-dev": {
                 "codeigniter4/codeigniter4": "dev-develop",
-                "tatter/tools": "^1.6"
+                "tatter/tools": "^1.12"
             },
             "type": "library",
             "autoload": {
@@ -2309,7 +2309,7 @@
             ],
             "support": {
                 "issues": "https://github.com/tattersoftware/codeigniter4-handlers/issues",
-                "source": "https://github.com/tattersoftware/codeigniter4-handlers/tree/v2.2.0"
+                "source": "https://github.com/tattersoftware/codeigniter4-handlers/tree/v2.2.1"
             },
             "funding": [
                 {
@@ -2321,7 +2321,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-02-26T18:48:19+00:00"
+            "time": "2021-09-13T23:24:35+00:00"
         },
         {
             "name": "tatter/outbox",
@@ -7370,5 +7370,5 @@
         "php": "^7.3 || ^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
