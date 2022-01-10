@@ -158,55 +158,6 @@
             "time": "2021-06-18T18:09:26+00:00"
         },
         {
-            "name": "components/jquery",
-            "version": "3.5.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/components/jquery.git",
-                "reference": "b33e8f0f9a1cb2ae390cf05d766a900b53d2125b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/components/jquery/zipball/b33e8f0f9a1cb2ae390cf05d766a900b53d2125b",
-                "reference": "b33e8f0f9a1cb2ae390cf05d766a900b53d2125b",
-                "shasum": ""
-            },
-            "type": "component",
-            "extra": {
-                "component": {
-                    "scripts": [
-                        "jquery.js"
-                    ],
-                    "files": [
-                        "jquery.min.js",
-                        "jquery.min.map",
-                        "jquery.slim.js",
-                        "jquery.slim.min.js",
-                        "jquery.slim.min.map"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "JS Foundation and other contributors"
-                }
-            ],
-            "description": "jQuery JavaScript Library",
-            "homepage": "http://jquery.com",
-            "support": {
-                "forum": "http://forum.jquery.com",
-                "irc": "irc://irc.freenode.org/jquery",
-                "issues": "https://github.com/jquery/jquery/issues",
-                "source": "https://github.com/jquery/jquery",
-                "wiki": "http://docs.jquery.com/"
-            },
-            "time": "2020-05-05T13:21:02+00:00"
-        },
-        {
             "name": "guzzlehttp/promises",
             "version": "1.4.1",
             "source": {
@@ -1502,20 +1453,21 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v5.3.0",
+            "version": "v5.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "fcd0b29a7a0b1bb5bfbedc6231583d77fea04814"
+                "reference": "cfcbee910e159df402603502fe387e8b677c22fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/fcd0b29a7a0b1bb5bfbedc6231583d77fea04814",
-                "reference": "fcd0b29a7a0b1bb5bfbedc6231583d77fea04814",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/cfcbee910e159df402603502fe387e8b677c22fd",
+                "reference": "cfcbee910e159df402603502fe387e8b677c22fd",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2.5"
+                "php": ">=7.2.5",
+                "symfony/polyfill-php80": "^1.16"
             },
             "type": "library",
             "autoload": {
@@ -1547,7 +1499,7 @@
             "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/css-selector/tree/v5.3.0"
+                "source": "https://github.com/symfony/css-selector/tree/v5.4.2"
             },
             "funding": [
                 {
@@ -1563,7 +1515,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-26T17:40:38+00:00"
+            "time": "2021-12-16T21:58:21+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -1947,16 +1899,16 @@
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.23.0",
+            "version": "v1.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "eca0bf41ed421bed1b57c4958bab16aa86b757d0"
+                "reference": "57b712b08eddb97c762a8caa32c84e037892d2e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/eca0bf41ed421bed1b57c4958bab16aa86b757d0",
-                "reference": "eca0bf41ed421bed1b57c4958bab16aa86b757d0",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/57b712b08eddb97c762a8caa32c84e037892d2e9",
+                "reference": "57b712b08eddb97c762a8caa32c84e037892d2e9",
                 "shasum": ""
             },
             "require": {
@@ -2010,7 +1962,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.23.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.24.0"
             },
             "funding": [
                 {
@@ -2026,7 +1978,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-19T12:13:01+00:00"
+            "time": "2021-09-13T13:58:33+00:00"
         },
         {
             "name": "symfony/polyfill-uuid",
@@ -2187,74 +2139,6 @@
             "time": "2021-04-01T10:43:52+00:00"
         },
         {
-            "name": "tatter/assets",
-            "version": "v2.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tattersoftware/codeigniter4-assets.git",
-                "reference": "267220d437786e0ddb9d7681745f5942d95c543b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-assets/zipball/267220d437786e0ddb9d7681745f5942d95c543b",
-                "reference": "267220d437786e0ddb9d7681745f5942d95c543b",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.3 || ^8.0"
-            },
-            "require-dev": {
-                "codeigniter4/codeigniter4": "dev-develop",
-                "tatter/tools": "^1.10"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Tatter\\Assets\\": "src"
-                },
-                "exclude-from-classmap": [
-                    "**/Database/Migrations/**"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Matthew Gatner",
-                    "email": "mgatner@tattersoftware.com",
-                    "homepage": "https://tattersoftware.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Asset publishing and loading for CodeIgniter 4",
-            "homepage": "https://github.com/tattersoftware/codeigniter4-assets",
-            "keywords": [
-                "assets",
-                "codeigniter",
-                "codeigniter4",
-                "css",
-                "javascript",
-                "loader"
-            ],
-            "support": {
-                "issues": "https://github.com/tattersoftware/codeigniter4-assets/issues",
-                "source": "https://github.com/tattersoftware/codeigniter4-assets/tree/v2.3.0"
-            },
-            "funding": [
-                {
-                    "url": "https://paypal.me/tatter",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/tattersoftware",
-                    "type": "github"
-                }
-            ],
-            "time": "2021-06-14T19:08:02+00:00"
-        },
-        {
             "name": "tatter/handlers",
             "version": "v2.2.0",
             "source": {
@@ -2324,30 +2208,93 @@
             "time": "2021-02-26T18:48:19+00:00"
         },
         {
-            "name": "tatter/outbox",
-            "version": "v2.0.5",
+            "name": "tatter/layouts",
+            "version": "v1.0.0-rc.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/tattersoftware/codeigniter4-outbox.git",
-                "reference": "3a0919c62f0674685072030062f716ae38e15bcb"
+                "url": "https://github.com/tattersoftware/codeigniter4-layouts.git",
+                "reference": "6b6087883901c799cea435014e16174b8671e0e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-outbox/zipball/3a0919c62f0674685072030062f716ae38e15bcb",
-                "reference": "3a0919c62f0674685072030062f716ae38e15bcb",
+                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-layouts/zipball/6b6087883901c799cea435014e16174b8671e0e6",
+                "reference": "6b6087883901c799cea435014e16174b8671e0e6",
                 "shasum": ""
             },
             "require": {
-                "components/jquery": "^3.3",
-                "php": "^7.3 || ^8.0",
-                "tatter/assets": "^2.2",
-                "tijsverkoyen/css-to-inline-styles": "^2.2",
-                "twbs/bootstrap": "^4.5"
+                "php": "^7.3 || ^8.0"
             },
             "require-dev": {
                 "codeigniter4/codeigniter4": "dev-develop",
-                "myth/auth": "dev-develop",
-                "tatter/tools": "^1.8"
+                "tatter/tools": "^1.15"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tatter\\Layouts\\": "src"
+                },
+                "exclude-from-classmap": [
+                    "**/Database/Migrations/**"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matthew Gatner",
+                    "email": "mgatner@tattersoftware.com",
+                    "homepage": "https://tattersoftware.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Layout management service for CodeIgniter 4",
+            "homepage": "https://github.com/tattersoftware/codeigniter4-layouts",
+            "keywords": [
+                "codeigniter",
+                "codeigniter4",
+                "frontend",
+                "layouts"
+            ],
+            "support": {
+                "issues": "https://github.com/tattersoftware/codeigniter4-layouts/issues",
+                "source": "https://github.com/tattersoftware/codeigniter4-layouts/tree/v1.0.0-rc.1"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/tatter",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/tattersoftware",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-11-29T17:59:10+00:00"
+        },
+        {
+            "name": "tatter/outbox",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tattersoftware/codeigniter4-outbox.git",
+                "reference": "7e3138aa2172e14e841eb9a05eba2c901191489b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-outbox/zipball/7e3138aa2172e14e841eb9a05eba2c901191489b",
+                "reference": "7e3138aa2172e14e841eb9a05eba2c901191489b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3 || ^8.0",
+                "tatter/layouts": "^1.0",
+                "tijsverkoyen/css-to-inline-styles": "^2.2"
+            },
+            "require-dev": {
+                "codeigniter4/codeigniter4": "dev-develop",
+                "tatter/tools": "^1.15"
             },
             "type": "library",
             "autoload": {
@@ -2382,7 +2329,7 @@
             ],
             "support": {
                 "issues": "https://github.com/tattersoftware/codeigniter4-outbox/issues",
-                "source": "https://github.com/tattersoftware/codeigniter4-outbox/tree/v2.0.5"
+                "source": "https://github.com/tattersoftware/codeigniter4-outbox/tree/v2.1.0"
             },
             "funding": [
                 {
@@ -2394,7 +2341,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-05-27T19:59:16+00:00"
+            "time": "2022-01-08T16:49:14+00:00"
         },
         {
             "name": "tatter/patches",
@@ -2569,26 +2516,26 @@
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
-            "version": "2.2.3",
+            "version": "2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tijsverkoyen/CssToInlineStyles.git",
-                "reference": "b43b05cf43c1b6d849478965062b6ef73e223bb5"
+                "reference": "da444caae6aca7a19c0c140f68c6182e337d5b1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tijsverkoyen/CssToInlineStyles/zipball/b43b05cf43c1b6d849478965062b6ef73e223bb5",
-                "reference": "b43b05cf43c1b6d849478965062b6ef73e223bb5",
+                "url": "https://api.github.com/repos/tijsverkoyen/CssToInlineStyles/zipball/da444caae6aca7a19c0c140f68c6182e337d5b1c",
+                "reference": "da444caae6aca7a19c0c140f68c6182e337d5b1c",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-libxml": "*",
                 "php": "^5.5 || ^7.0 || ^8.0",
-                "symfony/css-selector": "^2.7 || ^3.0 || ^4.0 || ^5.0"
+                "symfony/css-selector": "^2.7 || ^3.0 || ^4.0 || ^5.0 || ^6.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.0 || ^7.5"
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.0 || ^7.5 || ^8.5.21 || ^9.5.10"
             },
             "type": "library",
             "extra": {
@@ -2616,70 +2563,9 @@
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
             "support": {
                 "issues": "https://github.com/tijsverkoyen/CssToInlineStyles/issues",
-                "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.3"
+                "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.4"
             },
-            "time": "2020-07-13T06:12:54+00:00"
-        },
-        {
-            "name": "twbs/bootstrap",
-            "version": "v4.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "6ffb0b48e455430f8a5359ed689ad64c1143fac2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/6ffb0b48e455430f8a5359ed689ad64c1143fac2",
-                "reference": "6ffb0b48e455430f8a5359ed689ad64c1143fac2",
-                "shasum": ""
-            },
-            "replace": {
-                "twitter/bootstrap": "self.version"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3.x-dev"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mark Otto",
-                    "email": "markdotto@gmail.com"
-                },
-                {
-                    "name": "Jacob Thornton",
-                    "email": "jacobthornton@gmail.com"
-                }
-            ],
-            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
-            "homepage": "https://getbootstrap.com/",
-            "keywords": [
-                "JS",
-                "css",
-                "framework",
-                "front-end",
-                "mobile-first",
-                "responsive",
-                "sass",
-                "web"
-            ],
-            "support": {
-                "issues": "https://github.com/twbs/bootstrap/issues",
-                "source": "https://github.com/twbs/bootstrap/tree/v4.6.0"
-            },
-            "funding": [
-                {
-                    "url": "https://opencollective.com/bootstrap",
-                    "type": "open_collective"
-                }
-            ],
-            "time": "2021-01-19T16:16:38+00:00"
+            "time": "2021-12-08T09:12:39+00:00"
         }
     ],
     "packages-dev": [
@@ -7370,5 +7256,5 @@
         "php": "^7.3 || ^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
