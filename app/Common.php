@@ -18,6 +18,9 @@
 // Check for Local autoload
 if (is_file($file = ROOTPATH . 'local/vendor/autoload.php'))
 {
+    /**
+     * @psalm-suppress MissingFile
+     */
 	require_once $file;
 }
 // @codeCoverageIgnoreEnd

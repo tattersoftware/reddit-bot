@@ -49,5 +49,8 @@ $routes->get('/', 'Home::index');
  */
 if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
 {
+    /**
+     * @psalm-suppress MissingFile
+     */
 	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }

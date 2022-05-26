@@ -3,16 +3,19 @@
 use App\Database\Seeds\InitialSeeder;
 use App\Entities\Submission;
 use App\Models\SubmissionModel;
-use CodeIgniter\Config\Config;
-use CodeIgniter\Test\CIDatabaseTestCase;
+use CodeIgniter\Config\Factories;
+use CodeIgniter\Test\CIUnitTestCase;
+use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\Filters\CITestStreamFilter;
 use Config\Project;
 use Tatter\Reddit\Structures\Kind;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 
-class ProjectTestCase extends CIDatabaseTestCase
+class ProjectTestCase extends CIUnitTestCase
 {
+    use DatabaseTestTrait;
+    
 	/**
 	 * Should the database be refreshed before each test?
 	 *
@@ -70,7 +73,7 @@ class ProjectTestCase extends CIDatabaseTestCase
 		// Configure for testing
 		$config                  = new Project();
 		$config->submissionsPath = $this->root->url();
-		Config::injectMock('Project', $config);
+		Factories::injectMock('config', 'Project', $config);
 
 		// Set up the stream filter so commands don't output
 		CITestStreamFilter::$buffer = '';
@@ -80,6 +83,8 @@ class ProjectTestCase extends CIDatabaseTestCase
 
 	protected function tearDown(): void
 	{
+	    parent::tearDown();
+	    
 		stream_filter_remove($this->streamFilter);
 
 		$this->root = null;
