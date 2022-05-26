@@ -5,39 +5,41 @@ use Tatter\Reddit\Structures\Thing;
 use Tatter\Reddit\Tokens\PasswordHandler;
 use Tests\Support\ProjectTestCase;
 
-class FetchTest extends ProjectTestCase
+/**
+ * @internal
+ */
+final class FetchTest extends ProjectTestCase
 {
-	public function testCanGetAccessToken()
-	{
-		$result = PasswordHandler::retrieve();
+    public function testCanGetAccessToken()
+    {
+        $result = PasswordHandler::retrieve();
 
-		$this->assertIsString($result);
-		$this->assertNotEmpty($result);
-	}
+        $this->assertIsString($result);
+        $this->assertNotEmpty($result);
+    }
 
-	public function testCanUnserializeThing()
-	{
-		$file     = SUPPORTPATH . 'submissions' . DIRECTORY_SEPARATOR . 't3_jxwuze';
-		$contents = file_get_contents($file);
+    public function testCanUnserializeThing()
+    {
+        $file     = SUPPORTPATH . 'submissions' . DIRECTORY_SEPARATOR . 't3_jxwuze';
+        $contents = file_get_contents($file);
 
-		$result = unserialize($contents);
+        $result = unserialize($contents);
 
-		$this->assertInstanceOf(Thing::class, $result);
-	}
+        $this->assertInstanceOf(Thing::class, $result);
+    }
 
-	public function testFetchStoresAfterSetting()
-	{
-		if (config('Reddit')->username === '')
-		{
-			$this->markTestSkipped('This test requires valid Reddit credentials.');
-		}
+    public function testFetchStoresAfterSetting()
+    {
+        if (config('Reddit')->username === '') {
+            $this->markTestSkipped('This test requires valid Reddit credentials.');
+        }
 
-		$this->assertEmpty(cache('rheroesofthestormnew'));
+        $this->assertEmpty(cache('rheroesofthestormnew'));
 
-		command('reddit:fetch');
-		$result = cache('rheroesofthestormnew');
+        command('reddit:fetch');
+        $result = cache('rheroesofthestormnew');
 
-		$this->assertNotEmpty($result);
-		$this->assertMatchesRegularExpression(Kind::NAME_REGEX, $result);
-	}
+        $this->assertNotEmpty($result);
+        $this->assertMatchesRegularExpression(Kind::NAME_REGEX, $result);
+    }
 }

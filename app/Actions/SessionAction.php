@@ -1,4 +1,6 @@
-<?php namespace App\Actions;
+<?php
+
+namespace App\Actions;
 
 use App\Entities\Submission;
 
@@ -11,18 +13,17 @@ use App\Entities\Submission;
  */
 class SessionAction implements ActionInterface
 {
-	/**
-	 * Processes this Action for a specific Submission.
-	 *
-	 * @param array $params Any additional parameters
-	 */
-	public function execute(Submission $submission, array $params = [])
-	{
-		if (! isset($_SESSION['submissions']))
-		{
-			$_SESSION['submissions'] = [];
-		}
+    /**
+     * Processes this Action for a specific Submission.
+     *
+     * @param array $params Any additional parameters
+     */
+    public function execute(Submission $submission, array $params = [])
+    {
+        if (! isset($_SESSION['submissions'])) {
+            $_SESSION['submissions'] = [];
+        }
 
-		$_SESSION['submissions'][] = $submission;
-	}
+        $_SESSION['submissions'][] = $submission;
+    }
 }

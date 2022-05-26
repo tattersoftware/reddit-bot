@@ -11,16 +11,15 @@
  * loaded early on, and may also contain additional functions
  * that you'd like to use throughout your entire application
  *
- * @link: https://codeigniter4.github.io/CodeIgniter4/
+ * @see: https://codeigniter4.github.io/CodeIgniter4/
  */
 
 // @codeCoverageIgnoreStart
 // Check for Local autoload
-if (is_file($file = ROOTPATH . 'local/vendor/autoload.php'))
-{
+if (is_file($file = ROOTPATH . 'local/vendor/autoload.php')) {
     /**
      * @psalm-suppress MissingFile
      */
-	require_once $file;
+    require_once $file;
 }
 // @codeCoverageIgnoreEnd

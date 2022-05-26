@@ -21,21 +21,21 @@ use Psr\Log\LoggerInterface;
  */
 class BaseController extends Controller
 {
-	/**
-	 * Instance of the main Request object.
-	 *
-	 * @var IncomingRequest|CLIRequest
-	 */
-	protected $request;
+    /**
+     * Instance of the main Request object.
+     *
+     * @var CLIRequest|IncomingRequest
+     */
+    protected $request;
 
-	/**
-	 * An array of helpers to be loaded automatically upon
-	 * class instantiation. These helpers will be available
-	 * to all other controllers that extend BaseController.
-	 *
-	 * @var array
-	 */
-	protected $helpers = [];
+    /**
+     * An array of helpers to be loaded automatically upon
+     * class instantiation. These helpers will be available
+     * to all other controllers that extend BaseController.
+     *
+     * @var array
+     */
+    protected $helpers = [];
 
     /**
      * Constructor.

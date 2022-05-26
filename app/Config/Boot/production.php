@@ -1,7 +1,7 @@
 <?php
 
-use function Sentry\init;
 use Sentry\Integration\IgnoreErrorsIntegration;
+use function Sentry\init;
 
 /*
  |--------------------------------------------------------------------------
@@ -29,14 +29,13 @@ defined('CI_DEBUG') || define('CI_DEBUG', false);
  *---------------------------------------------------------------
  * Initialize Sentry for exception reporting.
  */
-if (getenv('sentry.dsn'))
-{
-	init([
-		'dsn'          => getenv('sentry.dsn'),
-		'integrations' => [
-			new IgnoreErrorsIntegration([
-				'ignore_exceptions' => ['CodeIgniter\Exceptions\PageNotFoundException'],
-			]),
-		],
-	]);
+if (getenv('sentry.dsn')) {
+    init([
+        'dsn'          => getenv('sentry.dsn'),
+        'integrations' => [
+            new IgnoreErrorsIntegration([
+                'ignore_exceptions' => ['CodeIgniter\Exceptions\PageNotFoundException'],
+            ]),
+        ],
+    ]);
 }

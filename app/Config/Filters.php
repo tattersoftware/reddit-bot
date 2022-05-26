@@ -44,25 +44,25 @@ class Filters extends BaseConfig
         ],
     ];
 
-	/**
-	 * List of filter aliases that works on a
-	 * particular HTTP method (GET, POST, etc.).
-	 *
-	 * Example:
-	 * 'post' => ['csrf', 'throttle']
-	 *
-	 * @var array
-	 */
-	public $methods = [];
+    /**
+     * List of filter aliases that works on a
+     * particular HTTP method (GET, POST, etc.).
+     *
+     * Example:
+     * 'post' => ['csrf', 'throttle']
+     *
+     * @var array
+     */
+    public $methods = [];
 
-	/**
-	 * List of filter aliases that should run on any
-	 * before or after URI patterns.
-	 *
-	 * Example:
-	 * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
-	 *
-	 * @var array
-	 */
-	public $filters = [];
+    /**
+     * List of filter aliases that should run on any
+     * before or after URI patterns.
+     *
+     * Example:
+     * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
+     *
+     * @var array
+     */
+    public $filters = [];
 }
