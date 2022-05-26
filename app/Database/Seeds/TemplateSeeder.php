@@ -1,4 +1,6 @@
-<?php namespace App\Database\Seeds;
+<?php
+
+namespace App\Database\Seeds;
 
 use Tatter\Outbox\Database\Seeds\TemplateSeeder as BaseSeeder;
 use Tatter\Outbox\Models\TemplateModel;
@@ -19,33 +21,31 @@ use Tatter\Outbox\Models\TemplateModel;
  */
 class TemplateSeeder extends BaseSeeder
 {
-	public function run()
-	{
-		// Run the module version first to ensure Default exists
-		parent::run();
+    public function run()
+    {
+        // Run the module version first to ensure Default exists
+        parent::run();
 
-		// Use "Default" as the parent (will throw if it does not exist)
-		$default = model(TemplateModel::class)->findByName('Default');
+        // Use "Default" as the parent (will throw if it does not exist)
+        $default = model(TemplateModel::class)->findByName('Default');
 
-		// Define each Template
-		$templates = [
-			[
-				'name'    => 'Reddit Mention',
-				'subject' => 'Reddit keyword matched in {kind} {name}',
-				'body'    => view('emails/reddit_mention'),
-			],
-		];
+        // Define each Template
+        $templates = [
+            [
+                'name'    => 'Reddit Mention',
+                'subject' => 'Reddit keyword matched in {kind} {name}',
+                'body'    => view('emails/reddit_mention'),
+            ],
+        ];
 
-		foreach ($templates as $row)
-		{
-			if (model(TemplateModel::class)->where('name', $row['name'])->first())
-			{
-				continue;
-			}
+        foreach ($templates as $row) {
+            if (model(TemplateModel::class)->where('name', $row['name'])->first()) {
+                continue;
+            }
 
-			// Set the parent
-			$row['parent_id'] = $default->id;
-			model(TemplateModel::class)->insert($row);
-		}
-	}
+            // Set the parent
+            $row['parent_id'] = $default->id;
+            model(TemplateModel::class)->insert($row);
+        }
+    }
 }

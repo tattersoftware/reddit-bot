@@ -1,39 +1,34 @@
-<?php namespace App\Database\Seeds;
+<?php
+
+namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
+use Exception;
 
 class InitialSeeder extends Seeder
 {
-	public function run()
-	{
-		$errors = [];
+    public function run()
+    {
+        $errors = [];
 
-		// Seeds to run
-		$seeds = [
-			'App\Database\Seeds\TemplateSeeder',
-		];
+        // Seeds to run
+        $seeds = [
+            'App\Database\Seeds\TemplateSeeder',
+        ];
 
-		// Run each seeder in order
-		foreach ($seeds as $seedName)
-		{
-			try
-			{
-				$this->call($seedName);
-			}
-			catch (\Exception $e)
-			{
-				// Pass CLI exceptions back to BaseCommand for display
-				if (is_cli())
-				{
-					throw $e;
-				}
-				else
-				{
-					$errors[] = $e->getFile() . ' - ' . $e->getLine() . ': ' . $e->getMessage() . " (for {$seedName})";
-				}
-			}
-		}
-		
-		return $errors;
-	}
+        // Run each seeder in order
+        foreach ($seeds as $seedName) {
+            try {
+                $this->call($seedName);
+            } catch (Exception $e) {
+                // Pass CLI exceptions back to BaseCommand for display
+                if (is_cli()) {
+                    throw $e;
+                }
+                $errors[] = $e->getFile() . ' - ' . $e->getLine() . ': ' . $e->getMessage() . " (for {$seedName})";
+            }
+        }
+
+        return $errors;
+    }
 }

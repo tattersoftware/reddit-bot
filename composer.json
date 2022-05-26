@@ -1,58 +1,73 @@
 {
-	"name": "tatter/reddit-bot",
-	"type": "project",
-	"description": "Reddit Bot in PHP CodeIgniter 4",
-	"keywords": [
-		"codeigniter",
-		"codeigniter4",
-		"reddit",
-		"bot"
-	],
-	"homepage": "https://heroesshare.net",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Matthew Gatner",
-			"email": "mgatner@tattersoftware.com",
-			"homepage": "https://tattersoftware.com",
-			"role": "Developer"
-		}
-	],
-	"require": {
-		"php": "^7.3 || ^8.0",
-		"codeigniter4/codeigniter4": "dev-develop",
-		"sentry/sdk": "^3.1",
-		"tatter/handlers": "^2.1",
-		"tatter/outbox": "^2.0",
-		"tatter/pushover": "^1.0",
-		"tatter/reddit": "^1.0",
-		"tatter/patches": "^2.0"
-	},
-	"require-dev": {
-		"tatter/tools": "^1.6"
-	},
-	"autoload": {
-		"exclude-from-classmap": [
-			"**/Database/Migrations/**"
-		]
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Tests\\Support\\": "tests/_support"
-		}
-	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/codeigniter4/codeigniter4"
-		}
-	],
-	"minimum-stability": "dev",
-	"prefer-stable": true,
-	"scripts": {
-		"analyze": "phpstan analyze",
-		"mutate": "infection --threads=2 --skip-initial-tests --coverage=build/phpunit",
-		"style": "phpcbf --standard=./vendor/codeigniter4/codeigniter4-standard/CodeIgniter4 tests/ app/",
-		"test": "phpunit"
-	}
+    "name": "tatter/reddit-bot",
+    "description": "Reddit Bot in PHP CodeIgniter 4",
+    "license": "MIT",
+    "type": "project",
+    "keywords": [
+        "codeigniter",
+        "codeigniter4",
+        "reddit",
+        "bot"
+    ],
+    "authors": [
+        {
+            "name": "Matthew Gatner",
+            "email": "mgatner@tattersoftware.com",
+            "homepage": "https://tattersoftware.com",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://heroesshare.net",
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "codeigniter4/framework": "^4.1",
+        "sentry/sdk": "^3.1",
+        "tatter/handlers": "^2.1",
+        "tatter/outbox": "^2.0",
+        "tatter/patches": "^2.0",
+        "tatter/pushover": "^1.0",
+        "tatter/reddit": "^1.0"
+    },
+    "require-dev": {
+        "tatter/tools": "^2.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "exclude-from-classmap": [
+            "**/Database/Migrations/**"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Support\\": "tests/_support"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    },
+    "scripts": {
+        "analyze": [
+            "phpstan analyze",
+            "psalm"
+        ],
+        "ci": [
+            "Composer\\Config::disableProcessTimeout",
+            "@deduplicate",
+            "@analyze",
+            "@test",
+            "@inspect",
+            "rector process",
+            "@style"
+        ],
+        "deduplicate": "phpcpd app/ src/",
+        "inspect": "deptrac analyze --cache-file=build/deptrac.cache",
+        "mutate": "infection --threads=2 --skip-initial-tests --coverage=build/phpunit",
+        "patch": "patch",
+        "retool": "retool",
+        "style": "php-cs-fixer fix --verbose --ansi --using-cache=no",
+        "test": "phpunit"
+    }
 }

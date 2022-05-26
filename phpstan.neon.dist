@@ -2,22 +2,25 @@ parameters:
 	tmpDir: build/phpstan
 	level: 5
 	paths:
-		- app
-		- tests
+		- app/
+		- tests/
 	bootstrapFiles:
-		- vendor/codeigniter4/codeigniter4/system/Test/bootstrap.php
-	excludes_analyse:
+		- vendor/codeigniter4/framework/system/Test/bootstrap.php
+	excludePaths:
 		- app/Config/Routes.php
 		- app/Views/*
 	ignoreErrors:
+		- '#Call to an undefined method CodeIgniter\\Database\\BaseBuilder::[A-Za-z]+\(\)#'
+		- '#Call to an undefined method CodeIgniter\\Model::[A-Za-z]+\(\)#'
 		- '#Call to an undefined static method Config\\Services::[A-Za-z]+\(\)#'
+		- '#Cannot access property \$body on array\|object#'
 	universalObjectCratesClasses:
-		- CodeIgniter\Entity
+		- CodeIgniter\Entity\Entity
 		- Faker\Generator
-		- Tatter\Reddit\Structures\Thing
 		- Tatter\Handlers\BaseHandler
+		- Tatter\Reddit\Structures\Thing
 	scanDirectories:
-		- vendor/codeigniter4/codeigniter4/system/Helpers
+		- vendor/codeigniter4/framework/system/Helpers
 	dynamicConstantNames:
 		- APP_NAMESPACE
 		- CI_DEBUG

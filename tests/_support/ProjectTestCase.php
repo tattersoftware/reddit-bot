@@ -1,108 +1,118 @@
-<?php namespace Tests\Support;
+<?php
+
+namespace Tests\Support;
 
 use App\Database\Seeds\InitialSeeder;
 use App\Entities\Submission;
 use App\Models\SubmissionModel;
-use CodeIgniter\Config\Config;
-use CodeIgniter\Test\CIDatabaseTestCase;
+use CodeIgniter\Config\Factories;
+use CodeIgniter\Test\CIUnitTestCase;
+use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\Filters\CITestStreamFilter;
 use Config\Project;
-use Tatter\Reddit\Structures\Kind;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
+use Tatter\Reddit\Structures\Kind;
 
-class ProjectTestCase extends CIDatabaseTestCase
+/**
+ * @internal
+ */
+abstract class ProjectTestCase extends CIUnitTestCase
 {
-	/**
-	 * Should the database be refreshed before each test?
-	 *
-	 * @var boolean
-	 */
-	protected $refresh = true;
+    use DatabaseTestTrait;
 
-	/**
-	 * @var vfsStreamDirectory|null
-	 */
-	protected $root;
+    /**
+     * Should the database be refreshed before each test?
+     *
+     * @var bool
+     */
+    protected $refresh = true;
 
-	/**
-	 * @var resource
-	 */
-	private $streamFilter;
+    /**
+     * @var vfsStreamDirectory|null
+     */
+    protected $root;
 
-	/**
-	 * The seed file(s) used for all tests within this test case.
-	 * Should be fully-namespaced or relative to $basePath
-	 *
-	 * @var string|array
-	 */
-	protected $seed = InitialSeeder::class;
+    /**
+     * @var resource
+     */
+    private $streamFilter;
 
-	/**
-	 * The path to the seeds directory.
-	 * Allows overriding the default application directories.
-	 *
-	 * @var string
-	 */
-	protected $basePath = APPPATH . 'Database';
+    /**
+     * The seed file(s) used for all tests within this test case.
+     * Should be fully-namespaced or relative to $basePath
+     *
+     * @var array|string
+     */
+    protected $seed = InitialSeeder::class;
 
-	/**
-	 * The namespace(s) to help us find the migration classes.
-	 * Empty is equivalent to running `spark migrate -all`.
-	 * Note that running "all" runs migrations in date order,
-	 * but specifying namespaces runs them in namespace order (then date)
-	 *
-	 * @var string|array|null
-	 */
-	protected $namespace = null;
+    /**
+     * The path to the seeds directory.
+     * Allows overriding the default application directories.
+     *
+     * @var string
+     */
+    protected $basePath = APPPATH . 'Database';
 
-	/**
-	 * Mocks the configuration file and buffers output to the stream filter
-	 */
-	protected function setUp(): void
-	{
-		parent::setUp();
+    /**
+     * The namespace(s) to help us find the migration classes.
+     * Empty is equivalent to running `spark migrate -all`.
+     * Note that running "all" runs migrations in date order,
+     * but specifying namespaces runs them in namespace order (then date)
+     *
+     * @var array|string|null
+     */
+    protected $namespace;
 
-		// Start the virtual filesystem
-		$this->root = vfsStream::setup();
+    /**
+     * Mocks the configuration file and buffers output to the stream filter
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Start the virtual filesystem
+        $this->root = vfsStream::setup();
         vfsStream::copyFromFileSystem(SUPPORTPATH . 'submissions', $this->root);
 
-		// Configure for testing
-		$config                  = new Project();
-		$config->submissionsPath = $this->root->url();
-		Config::injectMock('Project', $config);
+        // Configure for testing
+        $config                  = new Project();
+        $config->submissionsPath = $this->root->url();
+        Factories::injectMock('config', 'Project', $config);
 
-		// Set up the stream filter so commands don't output
-		CITestStreamFilter::$buffer = '';
-		$this->streamFilter         = stream_filter_append(STDOUT, 'CITestStreamFilter');
-		$this->streamFilter         = stream_filter_append(STDERR, 'CITestStreamFilter');
-	}
+        // Set up the stream filter so commands don't output
+        CITestStreamFilter::$buffer = '';
+        $this->streamFilter         = stream_filter_append(STDOUT, 'CITestStreamFilter');
+        $this->streamFilter         = stream_filter_append(STDERR, 'CITestStreamFilter');
+    }
 
-	protected function tearDown(): void
-	{
-		stream_filter_remove($this->streamFilter);
+    protected function tearDown(): void
+    {
+        parent::tearDown();
 
-		$this->root = null;
-	}
+        stream_filter_remove($this->streamFilter);
 
-	/**
-	 * Creates a Submission to test with from
-	 * one of the support files.
-	 *
-	 * @return Submission
-	 */
-	protected function getSubmission($file = 't3_jxwuze'): Submission
-	{
-		$contents = file_get_contents(SUPPORTPATH . 'submissions' . DIRECTORY_SEPARATOR . $file);
+        $this->root = null;
+    }
 
-		/** @var Kind $kind */
-		$kind = unserialize($contents);
+    /**
+     * Creates a Submission to test with from
+     * one of the support files.
+     *
+     * @param mixed $file
+     */
+    protected function getSubmission($file = 't3_jxwuze'): Submission
+    {
+        $contents = file_get_contents(SUPPORTPATH . 'submissions' . DIRECTORY_SEPARATOR . $file);
 
-		$row = model(SubmissionModel::class)->fromKind($kind);
-		$row['directive'] = 'test_directive';
-		$row['match']     = 'Test Match';
-		$row['excerpt']   = 'Something something Test Match foo bar bam...';
+        /** @var Kind $kind */
+        $kind = unserialize($contents);
 
-		return new Submission($row);
-	}
+        $row              = model(SubmissionModel::class)->fromKind($kind);
+        $row['directive'] = 'test_directive';
+        $row['match']     = 'Test Match';
+        $row['excerpt']   = 'Something something Test Match foo bar bam...';
+
+        return new Submission($row);
+    }
 }

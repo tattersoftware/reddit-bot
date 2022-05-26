@@ -1,4 +1,6 @@
-<?php namespace App\Commands;
+<?php
+
+namespace App\Commands;
 
 use App\BaseDirective;
 use CodeIgniter\CLI\BaseCommand;
@@ -15,52 +17,48 @@ use Tatter\Reddit\Reddit;
  */
 abstract class RedditCommand extends BaseCommand
 {
-	/**
-	 * The group the command is lumped under
-	 * when listing commands.
-	 *
-	 * @var string
-	 */
-	protected $group = 'Tasks';
+    /**
+     * The group the command is lumped under
+     * when listing commands.
+     *
+     * @var string
+     */
+    protected $group = 'Tasks';
 
-	/**
-	 * Reddit API client
-	 *
-	 * @var Reddit
-	 */
-	protected $reddit;
+    /**
+     * Reddit API client
+     *
+     * @var Reddit
+     */
+    protected $reddit;
 
-	/**
-	 * Directives instances from Handlers
-	 *
-	 * @var array<string,BaseDirective>
-	 */
-	protected $directives = [];
+    /**
+     * Directives instances from Handlers
+     *
+     * @var array<string,BaseDirective>
+     */
+    protected $directives = [];
 
-	/**
-	 * Directory for storing submissions
-	 *
-	 * @var string
-	 */
-	protected $directory;
+    /**
+     * Directory for storing submissions
+     *
+     * @var string
+     */
+    protected $directory;
 
-	/**
-	 * BaseCommand constructor.
-	 *
-	 * @param LoggerInterface $logger
-	 * @param Commands        $commands
-	 */
-	public function __construct(LoggerInterface $logger, Commands $commands)
-	{
-		parent::__construct($logger, $commands);
+    /**
+     * BaseCommand constructor.
+     */
+    public function __construct(LoggerInterface $logger, Commands $commands)
+    {
+        parent::__construct($logger, $commands);
 
-		$this->reddit    = service('Reddit');
-		$this->directory = rtrim(config('Project')->submissionsPath, '/') . '/';
+        $this->reddit    = service('Reddit');
+        $this->directory = rtrim(config('Project')->submissionsPath, '/') . '/';
 
-		foreach (service('Handlers', 'Directives')->findAll() as $class)
-		{
-			$directive = new $class();
-			$this->directives[$directive->uid] = $directive;
-		}
-	}
+        foreach (service('Handlers', 'Directives')->findAll() as $class) {
+            $directive                         = new $class();
+            $this->directives[$directive->uid] = $directive;
+        }
+    }
 }
