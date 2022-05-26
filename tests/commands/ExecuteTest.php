@@ -6,16 +6,13 @@ use Tests\Support\ProjectTestCase;
 
 class ExecuteTest extends ProjectTestCase
 {
-	/**
-	 * @var int
-	 */
-	private $submissionId;
+	private int $submissionId;
 
 	/**
 	 * Create a mock Submission to have
 	 * its Actions executed.
 	 */
-	public function setUp(): void
+	protected function setUp(): void
 	{
 		parent::setUp();
 

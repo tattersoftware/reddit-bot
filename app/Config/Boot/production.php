@@ -1,5 +1,6 @@
 <?php
 
+use function Sentry\init;
 use Sentry\Integration\IgnoreErrorsIntegration;
 
 /*
@@ -30,7 +31,7 @@ defined('CI_DEBUG') || define('CI_DEBUG', false);
  */
 if (getenv('sentry.dsn'))
 {
-	Sentry\init([
+	init([
 		'dsn'          => getenv('sentry.dsn'),
 		'integrations' => [
 			new IgnoreErrorsIntegration([

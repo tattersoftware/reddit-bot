@@ -57,7 +57,7 @@ class ProjectTestCase extends CIUnitTestCase
 	 *
 	 * @var string|array|null
 	 */
-	protected $namespace = null;
+	protected $namespace;
 
 	/**
 	 * Mocks the configuration file and buffers output to the stream filter
@@ -93,8 +93,6 @@ class ProjectTestCase extends CIUnitTestCase
 	/**
 	 * Creates a Submission to test with from
 	 * one of the support files.
-	 *
-	 * @return Submission
 	 */
 	protected function getSubmission($file = 't3_jxwuze'): Submission
 	{

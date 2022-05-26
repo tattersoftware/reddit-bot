@@ -14,11 +14,9 @@ interface ActionInterface
 	/**
 	 * Processes this Action for a specific Submission.
 	 *
-	 * @param Submission $submission
 	 * @param array $params Any additional parameters
 	 *
 	 * @return mixed Mostly for testing
-	 *
 	 * @throws RuntimeException for any failures
 	 */
 	public function execute(Submission $submission, array $params = []);

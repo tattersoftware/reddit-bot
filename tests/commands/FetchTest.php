@@ -38,6 +38,6 @@ class FetchTest extends ProjectTestCase
 		$result = cache('rheroesofthestormnew');
 
 		$this->assertNotEmpty($result);
-		$this->assertEquals(1, preg_match(Kind::NAME_REGEX, $result));
+		$this->assertMatchesRegularExpression(Kind::NAME_REGEX, $result);
 	}
 }

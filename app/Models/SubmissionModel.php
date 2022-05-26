@@ -34,9 +34,7 @@ class SubmissionModel extends Model
 	/**
 	 * Converts a Kind to an array for Submissions
 	 *
-	 * @param Kind $kind
 	 *
-	 * @return array
 	 *
 	 * @throws RuntimeException for Kind that is not a Comment or Link
 	 */

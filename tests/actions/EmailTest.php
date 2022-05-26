@@ -10,15 +10,12 @@ use Tests\Support\ProjectTestCase;
 
 class EmailTest extends ProjectTestCase
 {
-	/**
-	 * @var Submission
-	 */
-	private $submission;
+	private Submission $submission;
 
 	/**
 	 * Mock Email so nothing really sends.
 	 */
-	public function setUp(): void
+	protected function setUp(): void
 	{
 		parent::setUp();
 

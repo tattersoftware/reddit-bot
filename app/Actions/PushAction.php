@@ -18,11 +18,9 @@ class PushAction implements ActionInterface
 	/**
 	 * Processes this Action for a specific Submission.
 	 *
-	 * @param Submission $submission
 	 * @param array $params Any additional parameters
 	 *
 	 * @return Message Mostly for testing
-	 *
 	 * @throws RuntimeException for any failures (PushoverException)
 	 */
 	public function execute(Submission $submission, array $params = []): Message
@@ -56,12 +54,9 @@ class PushAction implements ActionInterface
 		{
 			$thumbnail = WRITEPATH . 'uploads' . DIRECTORY_SEPARATOR . basename($thumbnailUrl);
 
-			if ($contents = file_get_contents($thumbnailUrl))
+			if (($contents = file_get_contents($thumbnailUrl)) && file_put_contents($thumbnail, $contents))
 			{
-				if (file_put_contents($thumbnail, $contents))
-				{
-					$message->attachment = $thumbnail;
-				}
+				$message->attachment = $thumbnail;
 			}
 		}
 

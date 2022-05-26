@@ -46,9 +46,6 @@ abstract class RedditCommand extends BaseCommand
 
 	/**
 	 * BaseCommand constructor.
-	 *
-	 * @param LoggerInterface $logger
-	 * @param Commands        $commands
 	 */
 	public function __construct(LoggerInterface $logger, Commands $commands)
 	{

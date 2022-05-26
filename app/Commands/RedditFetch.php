@@ -95,8 +95,6 @@ class RedditFetch extends RedditCommand
 
 	/**
 	 * Writes Things from an API Listing
-	 *
-	 * @param Listing $listing
 	 */
 	protected function write(Listing $listing): void
 	{

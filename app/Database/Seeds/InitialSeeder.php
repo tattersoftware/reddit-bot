@@ -1,5 +1,6 @@
 <?php namespace App\Database\Seeds;
 
+use Exception;
 use CodeIgniter\Database\Seeder;
 
 class InitialSeeder extends Seeder
@@ -20,17 +21,14 @@ class InitialSeeder extends Seeder
 			{
 				$this->call($seedName);
 			}
-			catch (\Exception $e)
+			catch (Exception $e)
 			{
 				// Pass CLI exceptions back to BaseCommand for display
 				if (is_cli())
 				{
 					throw $e;
 				}
-				else
-				{
-					$errors[] = $e->getFile() . ' - ' . $e->getLine() . ': ' . $e->getMessage() . " (for {$seedName})";
-				}
+				$errors[] = $e->getFile() . ' - ' . $e->getLine() . ': ' . $e->getMessage() . " (for {$seedName})";
 			}
 		}
 		

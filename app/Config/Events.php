@@ -35,9 +35,7 @@ Events::on('pre_system', function () {
 			ob_end_flush();
 		}
 
-		ob_start(function ($buffer) {
-			return $buffer;
-		});
+		ob_start(fn($buffer) => $buffer);
 	}
 
 	/*

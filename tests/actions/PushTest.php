@@ -9,12 +9,9 @@ use Tests\Support\ProjectTestCase;
 
 class PushTest extends ProjectTestCase
 {
-	/**
-	 * @var Submission
-	 */
-	private $submission;
+	private Submission $submission;
 
-	public function setUp(): void
+	protected function setUp(): void
 	{
 		parent::setUp();
 
