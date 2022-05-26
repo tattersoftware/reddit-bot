@@ -1,8 +1,10 @@
 # reddit-bot
 Reddit bot in PHP CodeIgniter 4
 
-[![](https://github.com/tattersoftware/reddit-bot/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/reddit-bot/actions?query=workflow%3A%22PHPUnit)
-[![](https://github.com/tattersoftware/reddit-bot/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/reddit-bot/actions?query=workflow%3A%22PHPStan)
+[![](https://github.com/tattersoftware/reddit-bot/workflows/PHPUnit/badge.svg)](https://github.com/tattersoftware/reddit-bot/actions/workflows/phpunit.yml)
+[![](https://github.com/tattersoftware/reddit-bot/workflows/PHPStan/badge.svg)](https://github.com/tattersoftware/reddit-bot/actions/workflows/phpstan.yml)
+[![](https://github.com/tattersoftware/reddit-bot/workflows/Deptrac/badge.svg)](https://github.com/tattersoftware/reddit-bot/actions/workflows/deptrac.yml)
+[![Coverage Status](https://coveralls.io/repos/github/tattersoftware/reddit-bot/badge.svg?branch=develop)](https://coveralls.io/github/tattersoftware/reddit-bot?branch=develop)
 
 ## Description
 
@@ -15,7 +17,7 @@ to be sure your environment meets all the
 [system requirements](https://codeigniter4.github.io/CodeIgniter4/intro/requirements.html).
 Framework requirements may change but here is a good start:
 
-* PHP 7.3 or newer
+* PHP 7.4 or newer
 * PHP extensions (`php -m`): intl, json, mbstring, mysqlnd, xml, curl
 * A database with one of the framework's supported drivers (default: SQLite3)
 
