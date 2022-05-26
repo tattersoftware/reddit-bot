@@ -85,19 +85,17 @@ class Logger extends BaseConfig
 		 */
 		'CodeIgniter\Log\Handlers\FileHandler' => [
 
-			/*
-			 * The log levels that this handler will handle.
-			 */
-			'handles'         => [
-				'critical',
-				'alert',
-				'emergency',
-				'debug',
-				'error',
-				'info',
-				'notice',
-				'warning',
-			],
+            // The log levels that this handler will handle.
+            'handles' => [
+                'critical',
+                'alert',
+                'emergency',
+                'debug',
+                'error',
+                'info',
+                'notice',
+                'warning',
+            ],
 
 			/*
 			 * The default filename extension for log files.

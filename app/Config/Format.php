@@ -61,19 +61,15 @@ class Format extends BaseConfig
 		'text/xml'         => 0,
 	];
 
-	//--------------------------------------------------------------------
-
-	/**
-	 * A Factory method to return the appropriate formatter for the given mime type.
-	 *
-	 * @param string $mime
-	 *
-	 * @return FormatterInterface
-	 *
-	 * @deprecated This is an alias of `\CodeIgniter\Format\Format::getFormatter`. Use that instead.
-	 */
-	public function getFormatter(string $mime)
-	{
-		return Services::format()->getFormatter($mime);
-	}
+    /**
+     * A Factory method to return the appropriate formatter for the given mime type.
+     *
+     * @return FormatterInterface
+     *
+     * @deprecated This is an alias of `\CodeIgniter\Format\Format::getFormatter`. Use that instead.
+     */
+    public function getFormatter(string $mime)
+    {
+        return Services::format()->getFormatter($mime);
+    }
 }

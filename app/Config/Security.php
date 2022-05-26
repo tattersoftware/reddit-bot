@@ -6,38 +6,60 @@ use CodeIgniter\Config\BaseConfig;
 
 class Security extends BaseConfig
 {
-	/**
-	 * --------------------------------------------------------------------------
-	 * CSRF Token Name
-	 * --------------------------------------------------------------------------
-	 *
-	 * Token name for Cross Site Request Forgery protection cookie.
-	 *
-	 * @var string
-	 */
-	public $tokenName = 'csrf_test_name';
+    /**
+     * --------------------------------------------------------------------------
+     * CSRF Protection Method
+     * --------------------------------------------------------------------------
+     *
+     * Protection Method for Cross Site Request Forgery protection.
+     *
+     * @var string 'cookie' or 'session'
+     */
+    public $csrfProtection = 'cookie';
 
-	/**
-	 * --------------------------------------------------------------------------
-	 * CSRF Header Name
-	 * --------------------------------------------------------------------------
-	 *
-	 * Token name for Cross Site Request Forgery protection cookie.
-	 *
-	 * @var string
-	 */
-	public $headerName = 'X-CSRF-TOKEN';
+    /**
+     * --------------------------------------------------------------------------
+     * CSRF Token Randomization
+     * --------------------------------------------------------------------------
+     *
+     * Randomize the CSRF Token for added security.
+     *
+     * @var bool
+     */
+    public $tokenRandomize = false;
 
-	/**
-	 * --------------------------------------------------------------------------
-	 * CSRF Cookie Name
-	 * --------------------------------------------------------------------------
-	 *
-	 * Cookie name for Cross Site Request Forgery protection cookie.
-	 *
-	 * @var string
-	 */
-	 public $cookieName = 'csrf_cookie_name';
+    /**
+     * --------------------------------------------------------------------------
+     * CSRF Token Name
+     * --------------------------------------------------------------------------
+     *
+     * Token name for Cross Site Request Forgery protection.
+     *
+     * @var string
+     */
+    public $tokenName = 'csrf_test_name';
+
+    /**
+     * --------------------------------------------------------------------------
+     * CSRF Header Name
+     * --------------------------------------------------------------------------
+     *
+     * Header name for Cross Site Request Forgery protection.
+     *
+     * @var string
+     */
+    public $headerName = 'X-CSRF-TOKEN';
+
+    /**
+     * --------------------------------------------------------------------------
+     * CSRF Cookie Name
+     * --------------------------------------------------------------------------
+     *
+     * Cookie name for Cross Site Request Forgery protection.
+     *
+     * @var string
+     */
+    public $cookieName = 'csrf_cookie_name';
 
 	/**
 	 * --------------------------------------------------------------------------
@@ -52,16 +74,16 @@ class Security extends BaseConfig
 	 */
 	public $expires = 7200;
 
-	/**
-	 * --------------------------------------------------------------------------
-	 * CSRF Regenerate
-	 * --------------------------------------------------------------------------
-	 *
-	 * Regenerate CSRF Token on every request.
-	 *
-	 * @var boolean
-	 */
-	public $regenerate = true;
+    /**
+     * --------------------------------------------------------------------------
+     * CSRF Regenerate
+     * --------------------------------------------------------------------------
+     *
+     * Regenerate CSRF Token on every submission.
+     *
+     * @var bool
+     */
+    public $regenerate = true;
 
 	/**
 	 * --------------------------------------------------------------------------

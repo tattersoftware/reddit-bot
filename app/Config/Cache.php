@@ -97,19 +97,33 @@ class Cache extends BaseConfig
 	 */
 	public $ttl = 60;
 
-	/**
-	 * --------------------------------------------------------------------------
-	 * File settings
-	 * --------------------------------------------------------------------------
-	 * Your file storage preferences can be specified below, if you are using
-	 * the File driver.
-	 *
-	 * @var array<string, string|int|null>
-	 */
-	public $file = [
-		'storePath' => WRITEPATH . 'cache/',
-		'mode'      => 0640,
-	];
+    /**
+     * --------------------------------------------------------------------------
+     * Reserved Characters
+     * --------------------------------------------------------------------------
+     *
+     * A string of reserved characters that will not be allowed in keys or tags.
+     * Strings that violate this restriction will cause handlers to throw.
+     * Default: {}()/\@:
+     * Note: The default set is required for PSR-6 compliance.
+     *
+     * @var string
+     */
+    public $reservedCharacters = '{}()/\@:';
+
+    /**
+     * --------------------------------------------------------------------------
+     * File settings
+     * --------------------------------------------------------------------------
+     * Your file storage preferences can be specified below, if you are using
+     * the File driver.
+     *
+     * @var array<string, int|string|null>
+     */
+    public $file = [
+        'storePath' => WRITEPATH . 'cache/',
+        'mode'      => 0640,
+    ];
 
 	/**
 	 * -------------------------------------------------------------------------

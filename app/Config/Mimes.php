@@ -16,7 +16,6 @@ namespace Config;
  * When working with mime types, please make sure you have the ´fileinfo´
  * extension enabled to reliably detect the media types.
  */
-
 class Mimes
 {
 	/**
@@ -483,16 +482,14 @@ class Mimes
 		],
 	];
 
-	/**
-	 * Attempts to determine the best mime type for the given file extension.
-	 *
-	 * @param string $extension
-	 *
-	 * @return string|null The mime type found, or none if unable to determine.
-	 */
-	public static function guessTypeFromExtension(string $extension)
-	{
-		$extension = trim(strtolower($extension), '. ');
+    /**
+     * Attempts to determine the best mime type for the given file extension.
+     *
+     * @return string|null The mime type found, or none if unable to determine.
+     */
+    public static function guessTypeFromExtension(string $extension)
+    {
+        $extension = trim(strtolower($extension), '. ');
 
 		if (! array_key_exists($extension, static::$mimes))
 		{
@@ -502,19 +499,18 @@ class Mimes
 		return is_array(static::$mimes[$extension]) ? static::$mimes[$extension][0] : static::$mimes[$extension];
 	}
 
-	/**
-	 * Attempts to determine the best file extension for a given mime type.
-	 *
-	 * @param string      $type
-	 * @param string|null $proposedExtension - default extension (in case there is more than one with the same mime type)
-	 *
-	 * @return string|null The extension determined, or null if unable to match.
-	 */
-	public static function guessExtensionFromType(string $type, string $proposedExtension = null)
-	{
-		$type = trim(strtolower($type), '. ');
+    /**
+     * Attempts to determine the best file extension for a given mime type.
+     *
+     * @param string|null $proposedExtension - default extension (in case there is more than one with the same mime type)
+     *
+     * @return string|null The extension determined, or null if unable to match.
+     */
+    public static function guessExtensionFromType(string $type, ?string $proposedExtension = null)
+    {
+        $type = trim(strtolower($type), '. ');
 
-		$proposedExtension = trim(strtolower($proposedExtension));
+        $proposedExtension = trim(strtolower($proposedExtension ?? ''));
 
 		if ($proposedExtension !== '')
 		{

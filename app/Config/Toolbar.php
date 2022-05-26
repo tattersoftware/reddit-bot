@@ -44,18 +44,30 @@ class Toolbar extends BaseConfig
 		Events::class,
 	];
 
-	/**
-	 * --------------------------------------------------------------------------
-	 * Max History
-	 * --------------------------------------------------------------------------
-	 *
-	 * `$maxHistory` sets a limit on the number of past requests that are stored,
-	 * helping to conserve file space used to store them. You can set it to
-	 * 0 (zero) to not have any history stored, or -1 for unlimited history.
-	 *
-	 * @var integer
-	 */
-	public $maxHistory = 20;
+    /**
+     * --------------------------------------------------------------------------
+     * Collect Var Data
+     * --------------------------------------------------------------------------
+     *
+     * If set to false var data from the views will not be colleted. Usefull to
+     * avoid high memory usage when there are lots of data passed to the view.
+     *
+     * @var bool
+     */
+    public $collectVarData = true;
+
+    /**
+     * --------------------------------------------------------------------------
+     * Max History
+     * --------------------------------------------------------------------------
+     *
+     * `$maxHistory` sets a limit on the number of past requests that are stored,
+     * helping to conserve file space used to store them. You can set it to
+     * 0 (zero) to not have any history stored, or -1 for unlimited history.
+     *
+     * @var int
+     */
+    public $maxHistory = 20;
 
 	/**
 	 * --------------------------------------------------------------------------

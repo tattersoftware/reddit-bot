@@ -96,7 +96,7 @@
 										}
 										foreach ($row['args'] as $key => $value) : ?>
 											<tr>
-												<td><code><?= esc(isset($params[$key]) ? '$' . $params[$key]->name : "#$key") ?></code></td>
+												<td><code><?= esc(isset($params[$key]) ? '$' . $params[$key]->name : "#{$key}") ?></code></td>
 												<td><pre><?= esc(print_r($value, true)) ?></pre></td>
 											</tr>
 										<?php endforeach ?>
@@ -199,7 +199,7 @@
 					<tbody>
 						<tr>
 							<td style="width: 10em">Path</td>
-							<td><?= esc($request->uri) ?></td>
+							<td><?= esc($request->getUri()) ?></td>
 						</tr>
 						<tr>
 							<td>HTTP Method</td>
