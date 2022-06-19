@@ -67,7 +67,7 @@ class RedditFilter extends RedditCommand
                         $row['excerpt']   = excerpt($search, $row['match']);
 
                         // Print the header and highlighted version
-                        CLI::write($row['kind'] . ' ' . $row['name'] . ' ' . $row['title'], 'green'); // @phpstan-ignore-line
+                        CLI::write($row['kind'] . ' ' . $row['name'] . ' ' . $row['title'], 'green');
                         CLI::write(highlight_phrase($row['excerpt'], $row['match'], "\033[0;33m", "\033[0m"));
 
                         // Insert it into the database
