@@ -2191,24 +2191,24 @@
         },
         {
             "name": "tatter/layouts",
-            "version": "v1.0.0-rc.1",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tattersoftware/codeigniter4-layouts.git",
-                "reference": "6b6087883901c799cea435014e16174b8671e0e6"
+                "reference": "c3599824ac6e88b7ca9ea439416236ca434ad93b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-layouts/zipball/6b6087883901c799cea435014e16174b8671e0e6",
-                "reference": "6b6087883901c799cea435014e16174b8671e0e6",
+                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-layouts/zipball/c3599824ac6e88b7ca9ea439416236ca434ad93b",
+                "reference": "c3599824ac6e88b7ca9ea439416236ca434ad93b",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3 || ^8.0"
+                "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "codeigniter4/codeigniter4": "dev-develop",
-                "tatter/tools": "^1.15"
+                "codeigniter4/framework": "^4.1",
+                "tatter/tools": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -2241,7 +2241,7 @@
             ],
             "support": {
                 "issues": "https://github.com/tattersoftware/codeigniter4-layouts/issues",
-                "source": "https://github.com/tattersoftware/codeigniter4-layouts/tree/v1.0.0-rc.1"
+                "source": "https://github.com/tattersoftware/codeigniter4-layouts/tree/v1.0.0"
             },
             "funding": [
                 {
@@ -2253,30 +2253,30 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-29T17:59:10+00:00"
+            "time": "2022-07-22T13:21:45+00:00"
         },
         {
             "name": "tatter/outbox",
-            "version": "v2.1.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tattersoftware/codeigniter4-outbox.git",
-                "reference": "7e3138aa2172e14e841eb9a05eba2c901191489b"
+                "reference": "e1e823f6eb31b5eafc21c5169814315bb4b97380"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-outbox/zipball/7e3138aa2172e14e841eb9a05eba2c901191489b",
-                "reference": "7e3138aa2172e14e841eb9a05eba2c901191489b",
+                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-outbox/zipball/e1e823f6eb31b5eafc21c5169814315bb4b97380",
+                "reference": "e1e823f6eb31b5eafc21c5169814315bb4b97380",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3 || ^8.0",
+                "php": "^7.4 || ^8.0",
                 "tatter/layouts": "^1.0",
                 "tijsverkoyen/css-to-inline-styles": "^2.2"
             },
             "require-dev": {
-                "codeigniter4/codeigniter4": "dev-develop",
-                "tatter/tools": "^1.15"
+                "codeigniter4/framework": "^4.1",
+                "tatter/tools": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -2311,7 +2311,7 @@
             ],
             "support": {
                 "issues": "https://github.com/tattersoftware/codeigniter4-outbox/issues",
-                "source": "https://github.com/tattersoftware/codeigniter4-outbox/tree/v2.1.0"
+                "source": "https://github.com/tattersoftware/codeigniter4-outbox/tree/v2.1.1"
             },
             "funding": [
                 {
@@ -2323,7 +2323,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-01-08T16:49:14+00:00"
+            "time": "2022-07-22T20:33:11+00:00"
         },
         {
             "name": "tatter/patches",
