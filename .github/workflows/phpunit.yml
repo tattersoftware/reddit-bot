@@ -25,9 +25,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     strategy:
       matrix:
-        # Temporarily disabled 8.1 until CodeIgniter 4.2
-        # php-versions: ['7.4', '8.0', '8.1']
-        php-versions: ['7.4', '8.0']
+        php-versions: ['7.4', '8.0', '8.1']
 
     steps:
       - name: Checkout
