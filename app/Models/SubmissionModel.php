@@ -55,7 +55,7 @@ class SubmissionModel extends Model
                     'body'  => $kind->body,
                     'html'  => $kind->body_html,
                 ]);
-            break;
+                break;
 
             case 'Link':
                 $row = array_merge($row, [
@@ -63,7 +63,7 @@ class SubmissionModel extends Model
                     'body'  => $kind->selftext,
                     'html'  => $kind->selftext_html,
                 ]);
-            break;
+                break;
 
             default:
                 throw new RuntimeException('Unsupport Kind:' . get_class($kind));
