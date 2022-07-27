@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "59eb0b05e5288ee37bfe57e507b8ed6d",
+    "content-hash": "a4b505206437fe1114a7c905b5e2c353",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -2122,24 +2122,24 @@
         },
         {
             "name": "tatter/handlers",
-            "version": "v2.2.1",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tattersoftware/codeigniter4-handlers.git",
-                "reference": "bd86605017cc930dce6b4ec0b8c6e78dd9404b69"
+                "reference": "31ef7d85a6142dab1011f020c572c3e95a45b18a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-handlers/zipball/bd86605017cc930dce6b4ec0b8c6e78dd9404b69",
-                "reference": "bd86605017cc930dce6b4ec0b8c6e78dd9404b69",
+                "url": "https://api.github.com/repos/tattersoftware/codeigniter4-handlers/zipball/31ef7d85a6142dab1011f020c572c3e95a45b18a",
+                "reference": "31ef7d85a6142dab1011f020c572c3e95a45b18a",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3 || ^8.0"
+                "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "codeigniter4/codeigniter4": "dev-develop",
-                "tatter/tools": "^1.12"
+                "codeigniter4/framework": "^4.1",
+                "tatter/tools": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -2162,7 +2162,7 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Cross-module handler registration, for CodeIgniter 4",
+            "description": "Handler discovery and management, for CodeIgniter 4",
             "homepage": "https://github.com/tattersoftware/codeigniter4-handlers",
             "keywords": [
                 "adapters",
@@ -2175,7 +2175,7 @@
             ],
             "support": {
                 "issues": "https://github.com/tattersoftware/codeigniter4-handlers/issues",
-                "source": "https://github.com/tattersoftware/codeigniter4-handlers/tree/v2.2.1"
+                "source": "https://github.com/tattersoftware/codeigniter4-handlers/tree/v3.0.0"
             },
             "funding": [
                 {
@@ -2187,7 +2187,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-09-13T23:24:35+00:00"
+            "time": "2022-07-10T13:04:35+00:00"
         },
         {
             "name": "tatter/layouts",
