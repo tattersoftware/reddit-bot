@@ -21,6 +21,8 @@ final class EmailTest extends ProjectTestCase
     {
         parent::setUp();
 
+        config('Email')->recipients = 'notifications@exmaple.com';
+
         Services::injectMock('email', new MockEmail(config('Email')));
 
         $this->submission = $this->getSubmission();
