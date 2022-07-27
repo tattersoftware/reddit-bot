@@ -22,7 +22,7 @@
         "php": "^7.4 || ^8.0",
         "codeigniter4/framework": "^4.1",
         "sentry/sdk": "^3.1",
-        "tatter/handlers": "^2.1",
+        "tatter/handlers": "^3.0",
         "tatter/outbox": "^2.0",
         "tatter/patches": "^2.0",
         "tatter/pushover": "^1.0",
